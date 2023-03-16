@@ -24,9 +24,10 @@ mongoose.connection.on("error", () => {
 mongoose.connection.on("open", () => {
     console.log("Connexion à la base de donénes établie");
     app.use('/', puplicRouter);
-    app.use('/', [verifyUser] , userRouter);
-    app.use('/', [verifyUser, verifyAdmin] , adminRouter);
-    app.use('/', [verifyUser, verifyMod] , modRouter);
+    app.use('/user', [verifyUser] , userRouter);
+    app.use('/admin', [verifyUser, verifyAdmin] , adminRouter);
+    app.use('/mod', [verifyUser, verifyMod] , modRouter);
+
 });
 
 app.listen(9602,function(){

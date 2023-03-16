@@ -4,6 +4,7 @@ export const articlesSchema = mongoose.Schema({
     title: {
         type: String,
         required: true,
+        unique:true
     },
     content: {
         type: String,
@@ -13,6 +14,7 @@ export const articlesSchema = mongoose.Schema({
         type: String,
         enum: ['blog' , 'guide'],
         default: 'blog',
+        required:true
     },
     link: {
         type: String,

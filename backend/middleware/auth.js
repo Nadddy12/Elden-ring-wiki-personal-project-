@@ -37,13 +37,15 @@ export const verifyMod = async (req , res , next) => {
 };
 
 export const verifyAdmin = async (req , res , next) => {
-  try {
+  try { 
     const user = await User.findOne({_id: req.userId});
     if (user.role !== ADMIN_ROLE) {
+      console.log(user)
       return res.status(400).json({message:"Unauthorized!"});
     }
     next();
   } catch (err) {
+    console.log(err)
     res.status(401).send({message: "Unauthorized!"});
   }
 };

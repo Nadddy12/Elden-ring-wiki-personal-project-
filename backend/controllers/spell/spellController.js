@@ -1,15 +1,15 @@
-import {Equipment} from "../../models/equipments/equipmentsSchema.js";
+import {Spell} from "../../models/spells/spellsSchema.js";
 import formidable from 'formidable';
 import fs from 'fs';
 
 
-export const getAllEquipment = async (req , res) => {
+export const getAllSpell = async (req , res) => {
     try{
-        const equipment = await Equipment.find();
-        if (!equipment) {
-        return res.status(400).json({ message: "No equipment found in database" });
-    }
-        res.status(200).json(equipment);
+        const spell = await Spell.find();
+        if(!spell){
+          return res.status(401).json({message:"No spell found in database"});
+        }
+        res.status(200).json(spell);
     }catch (err) {
         console.log(err);
         res.status(500).json({message:"Server error"});
@@ -17,22 +17,22 @@ export const getAllEquipment = async (req , res) => {
 };
 
 
-export const getEquipmentByType = async (req, res) => {
-    const equipmentType = req.query.type;
+export const getSpellByType = async (req, res) => {
+    const spellType = req.query.type;
+    
     if (!req.query) {
         return res.status(400).json({ message: 'Missing required parameters' });
     }
-    
     try {
-      const types = await Equipment.distinct("type");
-      if(!equipmentType){
-          return res.status(401).json({message: "No information of equipment type provided!"});
+      const types = await Spell.distinct("type");
+      if(!spellType){
+          return res.status(401).json({message: "No information of spell type provided!"});
       }
-      if(types.includes(equipmentType)){
-          const equipment = await Equipment.find({ type: equipmentType });
-          res.status(200).json(equipment);
+      if(types.includes(spellType)){
+          const spell = await Spell.find({ type:spellType });
+          res.status(200).json(spell);
       }else {
-          res.status(400).json({message: "Invalid equipment type"});
+          res.status(400).json({message: "Invalid spell type or spell type doesn't exist"});
       }
     }    
     catch (err) {
@@ -42,19 +42,19 @@ export const getEquipmentByType = async (req, res) => {
 };
 
 
-export const getOneEquipment = async (req , res) => {
+export const getOneSpell = async (req , res) => {
     
     const id = req.params.id;
+    
     if (!req.params) {
         return res.status(400).json({ message: 'Missing required parameters' });
     }
-    
     try{
-        const equipment = await Equipment.findById(id);
-        if(!equipment){
-            return res.status(404).json({ message: 'Equipment not found' });
+        const spell = await Spell.findById(id);
+        if(!spell){
+            return res.status(404).json({ message: 'spell not found' });
         }
-        res.status(200).json(equipment);
+        res.status(200).json(spell);
     }catch (err) {
         console.log(err);
         res.status(401).json({message:"Bad request or no id provided"});
@@ -62,7 +62,7 @@ export const getOneEquipment = async (req , res) => {
 };
 
 
-export const addEquipment = async (req, res) => {
+export const addSpell = async (req, res) => {
   
     const form = formidable({ multiples: true });
     form.parse(req, async (err, fields, files) => {
@@ -70,18 +70,18 @@ export const addEquipment = async (req, res) => {
             return res.status(400).json({ message: "The information provided in your form not completed" });
         }
 
-    const { name, type, damagetype, infusion, damage } = fields;
+    const { name, type, damagetype, damage } = fields;
     
     const image=[];
-    if(!name || !type || !damagetype || !infusion || !damage){
+    
+    if(!name || !type || !damagetype || !damage){
       return res.status(401).json({message:"All fields must fill"});
     }
 
-    const equipment = new Equipment({
+    const spell = new Spell({
       name,
       type,
       damagetype,
-      infusion,
       damage,
       image 
     });
@@ -95,35 +95,36 @@ export const addEquipment = async (req, res) => {
       if(files.image instanceof Object){
         let oldpath = files.image.filepath;
 
-        let newpath = 'public/equipmentImg/' + files.image.originalFilename;
+        let newpath = 'public/spellImg/' + files.image.originalFilename;
 
         await fs.copyFile(oldpath , newpath , function(err) {
           if (err) {
             console.log(err);
           }
         });
-        await equipment.image.push(newpath);
+        await spell.image.push(newpath);
 
-        await equipment.save();
-        res.status(201).json({message:"Equipment successfully created", equipment});
+        await spell.save();
+        res.status(201).json({message:"Spell successfully created", spell});
       }
     }
     catch (error) {
       console.log(error);
       if (error.code === 11000) {
-        return res.status(400).json({ message: "Name already exists" });
-      }
-        return res.status(500).json({ message: "Internal server error" });
+        return res.status(400).json({message:"Name already exists"});
+        }
+      res.status(500).json({ message: "Internal server error" });
     }
   });
 };
 
 
-export const updateEquipment = async (req, res) => {
+export const updateSpell = async (req, res) => {
   
   const id = req.params.id;
   
   const form = formidable({ multiples: true });
+  
   if (!req.params) {
         return res.status(400).json({ message: 'Missing required parameters' });
     }
@@ -133,13 +134,12 @@ export const updateEquipment = async (req, res) => {
       return res.status(400).json({ message: "The information provided in your form not completed" });
     }
     
-    const { name, type, damagetype, infusion, damage } = fields;
+    const { name, type, damagetype, damage } = fields;
     
     const update = {
       name,
       type,
       damagetype,
-      infusion,
       damage,
     };
     
@@ -151,17 +151,17 @@ export const updateEquipment = async (req, res) => {
       
       if(files.image instanceof Object){
         const oldpath = files.image.filepath;
-        const newpath = 'public/equipmentImg/' + files.image.originalFilename;
+        const newpath = 'public/spellImg/' + files.image.originalFilename;
 
         fs.promises.copyFile(oldpath, newpath);
         update.image = [newpath];
       }
-        const equipment = await Equipment.findByIdAndUpdate(id, update);
+        const spell = await Spell.findByIdAndUpdate(id, update);
         
-        if(!equipment){
-          return res.status(404).json({ message: "Equipment not found" });
+        if(!spell){
+          return res.status(404).json({ message: "Spell not found" });
         }
-        res.status(200).json({message: "Equipment successfully updated" , equipment});
+        res.status(200).json({message: "Spell successfully updated" , spell});
     }
     catch (error) {
       console.log(error);
@@ -171,7 +171,7 @@ export const updateEquipment = async (req, res) => {
 };
 
 
-export const deleteEquipment = async (req , res) => {
+export const deleteSpell = async (req , res) => {
     const id = req.params.id;
     
     if (!req.params) {
@@ -179,11 +179,11 @@ export const deleteEquipment = async (req , res) => {
     }
     
     try {
-        const equipment = await Equipment.findByIdAndDelete(id);
-        if (!equipment ) {
-            return res.status(404).json({ message: "Equipment not found" });
+        const spell = await Spell.findByIdAndDelete(id);
+        if (!spell ) {
+            return res.status(404).json({ message: "Spell not found" });
         }
-        res.status(200).json({ message: "Equipment deleted successfully" });
+        res.status(200).json({ message: "Spell deleted successfully" });
     } 
     catch (error) {
         console.log(error);

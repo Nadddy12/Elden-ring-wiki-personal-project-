@@ -10,18 +10,23 @@ export const equipmentsSchema = mongoose.Schema({
         type: String,
         enum: ["Daggers" , "Straight Swords" , "Greatswords" , "Colossal Swords" , "Thrusting Swords" , "Heavy Thrusting Swords" , "Curved Swords" , "Curved Greatswords" , "Katanas" , "Twinblades" , "Axes" , "Greataxes" , "Hammers" , "Flails" , "Great Hammers" , "Colossal Weapons" , "Spears" , "Great Spears" , "Halberds" , "Reapers" , "Whips" , "Fists" , "Claws"],
         default: "Daggers",
+        required: true
     },
     damagetype: {
         type: Array(String),
+        required: true
     },
     image: {
-        type: String,
+        type: [String],
+        required: true
     },
     infusion: {
         type: Boolean,
+        required: true
     },
     damage: {
         type: Number,
+        required: true
     }
 }, {timestamps: true,
     versionKey: false});

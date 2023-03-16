@@ -7,15 +7,21 @@ export const spellsSchema = mongoose.Schema({
     },
     type: {
         type:String,
+        enum: ["Incantation" , "Sorcery"],
+        default: "Sorcery",
+        required: true
     },
     damagetype: {
         type:String,
+        required: true
     },
     image: {
-        type: String,
+        type:[String],
+        required: true
     },
     damage: {
         type: Number,
+        required: true
     }
 }, {timestamps: true,
     versionKey: false});

@@ -11,7 +11,7 @@ export const signin = async (req , res) => {
     
     try{
         if(!username || !email || !password){
-            res.status(400).json({message:"All fields are required"});
+           return res.status(400).json({message:"All fields are required"});
         }
         const saltRounds = 10;
     
@@ -50,13 +50,16 @@ export const login = async(req , res) => {
     const user = await User.findOne({email});
     
     try {
+        if(!email || !password){
+            return res.status(401).json({message: "All fields require"});
+        }
         if(user == undefined){
-            res.status(400).json("invalid email or password");
+            return res.status(400).json({message: "invalid email or password"});
         }
         bcrypt.compare(password, user.password, (err,match) =>{
             if(err){
                 console.log(err);
-                res.status(400).json({error: "Invalid email or password."});
+                return res.status(400).json({error: "Invalid email or password."});
             }
             if(match){
                 const jwt = user.createJWT();
@@ -70,7 +73,7 @@ export const login = async(req , res) => {
                     jwt
                 });
             } else {
-                res.status(400).json({error: "invalid password or email"});
+               return res.status(400).json({error: "invalid password or email"});
             }
         });
     } catch (error) {
