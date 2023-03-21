@@ -3,13 +3,14 @@ import { updateArticle , deleteArticle , createArticle } from "../controllers/ar
 import { addEquipment , updateEquipment , deleteEquipment} from "../controllers/equipment/equipmentController.js";
 import { addSpell , updateSpell , deleteSpell} from "../controllers/spell/spellController.js";
 import { deleteCommentaireAdmin } from "../controllers/commentaire/commentaireController.js";
-import { getAllUser , getOneUser , deleteUser } from "../controllers/user/userController.js";
+import { getAllUser , getOneUser , deleteUser , updateUserRole } from "../controllers/user/userController.js";
 
 const router = express.Router();
 
 router.get('/user', getAllUser);
 router.get('/user/:id', getOneUser);
 router.delete('/delete-user/:id', deleteUser);
+router.put('/update-user/:id', updateUserRole);
 
 router.post('/create-article', createArticle);
 router.put('/update-article/:id', updateArticle);

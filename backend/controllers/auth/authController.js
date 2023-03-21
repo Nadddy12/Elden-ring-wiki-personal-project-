@@ -5,13 +5,16 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const signin = async (req , res) => {
+export const signup = async (req , res) => {
     
-    const {username , email , password , role} = req.body;
+    const {username , email , password , role } = req.body;
     
     try{
-        if(!username || !email || !password){
+        if(!username || !email || !password ){
            return res.status(400).json({message:"All fields are required"});
+        }
+        if(password.length < 6){
+            return res.status(400).json({message:"Password must be at least 6 characters with at least one capital letter"});
         }
         const saltRounds = 10;
     
@@ -40,7 +43,7 @@ export const signin = async (req , res) => {
         if (err.code === 11000) {
         return res.status(400).json({message:"Username or email already exists"});
         }
-        res.status(500).json({error: "Internal server error."});
+        res.status(500).json({message: "Internal server error."});
     }
 };
 
@@ -53,13 +56,13 @@ export const login = async(req , res) => {
         if(!email || !password){
             return res.status(401).json({message: "All fields require"});
         }
-        if(user == undefined){
+        if(!user){
             return res.status(400).json({message: "invalid email or password"});
         }
         bcrypt.compare(password, user.password, (err,match) =>{
             if(err){
                 console.log(err);
-                return res.status(400).json({error: "Invalid email or password."});
+                return res.status(400).json({message: "Invalid email or password."});
             }
             if(match){
                 const jwt = user.createJWT();
@@ -73,12 +76,12 @@ export const login = async(req , res) => {
                     jwt
                 });
             } else {
-               return res.status(400).json({error: "invalid password or email"});
+               return res.status(400).json({message: "invalid password or email"});
             }
         });
     } catch (error) {
         console.log(error);
-        res.status(500).json({error: "Internal server error."});
+        res.status(500).json({message: "Internal server error."});
     }
 };
 

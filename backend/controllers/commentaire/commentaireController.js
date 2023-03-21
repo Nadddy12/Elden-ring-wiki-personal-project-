@@ -13,7 +13,7 @@ export const getCommentaireByArticle = async (req , res) => {
             return res.status(400).json({ message: 'Missing required parameters' });
         }
         if(articleId){
-            const commentaire = await Commentaire.find({article:articleId});
+            const commentaire = await Commentaire.find({article:articleId}).populate("user");
             if (!commentaire) {
                 return res.status(404).json({ message: 'No comments found for the given article ID' });
             }
@@ -24,6 +24,7 @@ export const getCommentaireByArticle = async (req , res) => {
     }
     catch(err){
         console.log(err);
+        res.status(500).json({message:"Internal Server Error"});
     }
 };
 

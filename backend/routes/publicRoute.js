@@ -1,5 +1,5 @@
 import express from "express";
-import {signin , login , verifyToken} from "../controllers/auth/authController.js";
+import {signup , login , verifyToken} from "../controllers/auth/authController.js";
 import { getAllBlogArticle , getOneArticle , getAllGuideArticle } from "../controllers/article/articleController.js";
 import { getAllEquipment , getEquipmentByType , getOneEquipment } from "../controllers/equipment/equipmentController.js";
 import { getAllSpell , getSpellByType , getOneSpell } from "../controllers/spell/spellController.js";
@@ -8,7 +8,7 @@ import { getCommentaireByArticle } from "../controllers/commentaire/commentaireC
 
 const router = express.Router();
 
-router.post('/signin', signin);
+router.post('/signup', signup);
 router.post('/login', login);
 router.get('/verify-token', verifyToken);
 

@@ -35,14 +35,14 @@ export const getOneArticle = async (req , res) => {
     const id = req.params.id;
     
     try{
-        const article = await Article.findById(id);
+        const article = await Article.findById(id).populate('user');
         if(!article){
             return res.status(404).json({ message: "Article not found" });
         }
         res.status(200).json(article);
     }catch (err) {
         console.log(err);
-        res.status(500).json({message:"Bad request or no id provided"});
+        res.status(500).json({message:"Internal server error"});
     }
 };
 
