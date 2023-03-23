@@ -9,6 +9,7 @@ export const fetchUser = createAsyncThunk(
 );
 
 const initialState =  {
+        id:"",
         username:"",
         email: "",
         role: "",
@@ -22,6 +23,7 @@ export const userSlice = createSlice({
         addUser: (state, action) => {
             return {
                 ...state,
+                id: action.payload.user.id,
                 username: action.payload.user.username,
                 email: action.payload.user.email,
                 role: action.payload.user.role,

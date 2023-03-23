@@ -1,23 +1,23 @@
 import { Link , useNavigate } from "react-router-dom";
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { useState } from "react";
-import { addUser } from "../../store/slices/user/userSlice.js"
+import { addUser } from "../../store/slices/user/userSlice.js";
 
 export const Signup = () => {
     
-    const [username , setUsername] = useState("")
-    const [email , setEmail] = useState("")
-    const [password , setPassword] = useState("")
-    const [error , setError] = useState(null)
+    const [username , setUsername] = useState("");
+    const [email , setEmail] = useState("");
+    const [password , setPassword] = useState("");
+    const [error , setError] = useState(null);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
     
     
     const handleRegister = async (e) =>{
-        e.preventDefault()
+        e.preventDefault();
         try{
-            let user = {username , email , password}
+            let user = {username , email , password};
                 const res = await fetch("http://abdulrahmanfakhri.ide.3wa.io:9602/signup", {
                 method:"post",
                 body:JSON.stringify(user),
@@ -35,12 +35,12 @@ export const Signup = () => {
             localStorage.setItem("jwt", data.jwt);
             navigate("/dashboard");
         }catch(err){
-            console.log(err)
+            console.log(err);
         }
     };
     
     return(
-        <>
+        <main>
             <Link to={"/"}>Home Page</Link>
             <form>
                 {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
@@ -52,6 +52,6 @@ export const Signup = () => {
                 <input type="password" name="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
                 <button onClick={handleRegister}>Sign in</button>
             </form>
-        </>
-    )
+        </main>
+    );
 };

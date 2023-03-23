@@ -13,7 +13,7 @@ export const getCommentaireByArticle = async (req , res) => {
             return res.status(400).json({ message: 'Missing required parameters' });
         }
         if(articleId){
-            const commentaire = await Commentaire.find({article:articleId}).populate("user");
+            const commentaire = await Commentaire.find({article:articleId}).populate({ path: 'user', select: 'username' });
             if (!commentaire) {
                 return res.status(404).json({ message: 'No comments found for the given article ID' });
             }

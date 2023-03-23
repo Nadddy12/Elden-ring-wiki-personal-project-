@@ -16,7 +16,7 @@ export const Login = () => {
     
     const handleLogin = async (e) =>{
         
-        e.preventDefault()
+        e.preventDefault();
         try{
             const res = await fetch("http://abdulrahmanfakhri.ide.3wa.io:9602/login", {
                 method:"post",
@@ -35,22 +35,22 @@ export const Login = () => {
             localStorage.setItem("jwt", data.jwt);
             navigate("/dashboard");
         }catch(err){
-            console.log(err)
+            console.log(err);
         }
-    }
+    };
     
     
     return(
-        <>
+        <main>
             <Link to={"/"}>Home Page</Link>
             <form>
                 {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
                 <label>email</label>
-                <input forHtml="email" type="email" name="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
+                <input forhtml="email" type="email" name="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
                 <label>password</label>
-                <input forHtml="password" type="password" name="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
+                <input forhtml="password" type="password" name="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
                 <button onClick={handleLogin}>Login</button>
             </form>
-        </>
-    )
+        </main>
+    );
 };

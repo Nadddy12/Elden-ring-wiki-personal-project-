@@ -4,12 +4,12 @@ import { FetchGet } from "../../helper/fetch.js";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export const Blog = (props) => {
+export const Equipment = () => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
     
-    const URL = "/blog";
-
+    const URL = `/equipment`;
+    
     useEffect(() => {
         const fetchData = async () =>{
             try{
@@ -22,17 +22,17 @@ export const Blog = (props) => {
         fetchData();
     }, []);
     
-
+    
 const content = error ? (
     <div className="errorMessage error" style={{ color: "red" }}>{error}</div>
     ) : (
     <main>
-        <div className="blogListContainer">
+        <div className="equipmentListContainer">
             {data.map((ele, i) => (
-                <div key={i} className="blogs">
-                    <Link to={"/article/" + ele._id} className="blogs-name">{ele.title}</Link>
-                    <p className="blogs-bref-view">{ele.content.split(" ").slice(0,30).join(" ")}...</p>
-                </div>
+            <div key={i} className="equipments">
+                <Link to={"/equipment/" + ele._id} className="equipments-name" >{ele.name}</Link>
+                <img src={`http://abdulrahmanfakhri.ide.3wa.io:9602/${ele.image[0]}`} alt={ele.name}/>
+            </div>
             ))}
         </div>
     </main>
@@ -46,11 +46,3 @@ const content = error ? (
         </>
     );
 };
-
-            /*.then((res) => {
-                setData(res);
-                console.log(res)
-            })
-            .catch((err) => {
-                 setError(err.message)
-            })*/

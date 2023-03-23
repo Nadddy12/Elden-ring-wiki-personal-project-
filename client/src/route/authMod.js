@@ -1,15 +1,22 @@
 import {Navigate} from "react-router-dom";
 import {useState} from "react";
+import {useSelector} from "react-redux";
 
-export const Usermiddleware = (props) => {
+export const Modmiddleware = (props) => {
     
-    const [error , setError] = useState(null)
+    const {user} = useSelector(state => state);
+    const [error , setError] = useState(null);
     
     try{
         if (!localStorage.getItem("jwt")) {
             return (
                 <Navigate to={"/login"}/>
             );
+        }
+        if (user.role !== "mod") {
+            return (
+                <Navigate to={"/"}/>
+            )
         }
         return (
             <>
@@ -25,5 +32,4 @@ export const Usermiddleware = (props) => {
             </>
         )
     }
-
 };
