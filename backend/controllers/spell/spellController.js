@@ -102,7 +102,7 @@ export const addSpell = async (req, res) => {
             console.log(err);
           }
         });
-        await spell.image.push(newpath);
+        await spell.image.push(`/spellImg/${files.image.originalFilename}`);
 
         await spell.save();
         res.status(201).json({message:"Spell successfully created", spell});
@@ -154,7 +154,7 @@ export const updateSpell = async (req, res) => {
         const newpath = 'public/spellImg/' + files.image.originalFilename;
 
         fs.promises.copyFile(oldpath, newpath);
-        update.image = [newpath];
+        update.image = [`/spellImg/${files.image.originalFilename}`];
       }
         const spell = await Spell.findByIdAndUpdate(id, update);
         

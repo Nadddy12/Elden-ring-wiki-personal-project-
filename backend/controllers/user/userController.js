@@ -6,13 +6,7 @@ export const getAllUser = async (req , res) => {
         if(!users){
             res.status(401).json({message:"Found no users in database"});
         }
-        res.status(200).json({
-            users: users.map((user) => ({
-            username: user.username,
-            email: user.email,
-            role: user.role
-            })) 
-        });
+        res.status(200).json(users);
     }
     catch(err){
         res.status(500).json({message: "Internet server error"});

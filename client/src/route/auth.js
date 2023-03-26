@@ -25,5 +25,4 @@ export const Usermiddleware = (props) => {
             </>
         )
     }
-
 };

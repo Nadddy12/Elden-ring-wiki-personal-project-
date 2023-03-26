@@ -102,7 +102,7 @@ export const addEquipment = async (req, res) => {
             console.log(err);
           }
         });
-        await equipment.image.push(newpath);
+        await equipment.image.push(`/equipmentImg/${files.image.originalFilename}`);
 
         await equipment.save();
         res.status(201).json({message:"Equipment successfully created", equipment});
@@ -154,7 +154,7 @@ export const updateEquipment = async (req, res) => {
         const newpath = 'public/equipmentImg/' + files.image.originalFilename;
 
         fs.promises.copyFile(oldpath, newpath);
-        update.image = [newpath];
+        update.image = [`/equipmentImg/${files.image.originalFilename}`];
       }
         const equipment = await Equipment.findByIdAndUpdate(id, update);
         

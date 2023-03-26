@@ -8,7 +8,7 @@ export const Blog = (props) => {
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
     
-    const URL = "/blog";
+    const URL = "/blog"
 
     useEffect(() => {
         const fetchData = async () =>{
