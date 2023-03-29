@@ -40,17 +40,20 @@ export const Signup = () => {
     };
     
     return(
-        <main>
+        <main className="auth-form">
             <Link to={"/"}>Home Page</Link>
             <form>
-                {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
-                <label>username</label>
-                <input type="username" name="username" onChange={(e) => setUsername(e.target.value)} value={username}/>
-                <label>email</label>
-                <input type="email" name="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
-                <label>password</label>
-                <input type="password" name="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-                <button onClick={handleRegister}>Sign in</button>
+                <fieldset>
+                    <legend>Join us in the journy of The Land Between</legend>
+                    {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
+                    <label>Username</label>
+                    <input type="Username" name="username" onChange={(e) => setUsername(e.target.value)} value={username}/>
+                    <label>Email</label>
+                    <input type="Email" name="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
+                    <label>Password</label>
+                    <input type="Password" name="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
+                    <button onClick={handleRegister}>Sign in</button>
+                </fieldset>
             </form>
         </main>
     );

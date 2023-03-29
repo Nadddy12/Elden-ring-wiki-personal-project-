@@ -43,13 +43,19 @@ export const OneBlog = () =>{
         <div className="errorMessage error" style={{ color: "red" }}>{error}</div>
         ) : (
         <main>
-            {blog.user &&
+            {blog.user ? (
                 <div className="blogContainer">
                     <h2 className="blog-title"> Title : {blog.title}</h2>
                     <h4 className="blog-author">Author : {blog.user.username}</h4>
                     <p className="blog-content">{blog.content}</p>
                 </div>
-            }
+            ) : (
+                <div className="blogContainer">
+                    <h2 className="blog-title"> Title : {blog.title}</h2>
+                    <h4 className="blog-author">Author : Unkonwn</h4>
+                    <p className="blog-content">{blog.content}</p>
+                </div>
+            )}
         </main>
         );
 

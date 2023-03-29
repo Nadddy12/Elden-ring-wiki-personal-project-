@@ -16,7 +16,7 @@ export const FetchGet = async (URL) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${getToken()}`
         },
         });
     if (!res.ok) {
@@ -38,7 +38,7 @@ export const FetchPost = async (URL , data) => {
             body:JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${getToken()}`
             }
         });
     if (!res.ok) {
@@ -59,7 +59,7 @@ export const FetchDelete = async (URL) => {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${getToken()}`
         },
         });
     if (!res.ok) {
@@ -81,7 +81,7 @@ export const FetchUpdate = async (URL , data) => {
             body:JSON.stringify(data),
             headers: {
                 "Content-Type": "application/json",
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${getToken()}`
             }
         });
     if (!res.ok) {

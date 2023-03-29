@@ -27,7 +27,6 @@ export const PublicRoutes = [
     { path:"/logout" , element: <Logout/>},
     { path:"/blog" , element: <Blog />},
     { path:"/guide" , element: <Guide />},
-    { path:"/article/:id" , element: <OneBlog/>},
     { path:"/equipment" , element: <Equipment/>},
     { path:"/equipment/:id" , element: <OneEquipment/>},
     { path:"/spell" , element: <Spell/>},
@@ -36,16 +35,16 @@ export const PublicRoutes = [
 
 export const UserRoutes = [
     { path:"/commentaire/:id" , element: <CreateCommentaire/> },
-    { path:"/dashboard" , element: <Dashboard/> }
+    { path:"/dashboard" , element: <Dashboard/> },
+    { path:"/article/:id" , element: <OneBlog/>},
 ];
 
 export const ModRoutes = [
-    
+    { path:"/create-blog" , element: <CreateBlog/>},
 ];
 
 export const AdminRoutes = [
     { path:"/control-panel" , element: <ControlPanel/> },
-    { path:"/create-blog" , element: <CreateBlog/>},
     { path:"/create-Guide" , element: <CreateGuide/>},
     { path:"/create-Equipment" , element: <CreateEquipment/>},
     { path:"/create-Spell" , element: <CreateSpell/>},

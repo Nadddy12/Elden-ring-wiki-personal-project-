@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import "./assets/colors/colors.scss";
+
+* {
+    font-family: 'EB Garamond', serif;
+    color: $font-3;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background: url('assets/photo/e8u661wb0gx71.png')repeat center center fixed;
+    -webkit-background-size: cover;
+    z-index: -1;
+}
+
+#root {
+    min-height:100vh;
+}

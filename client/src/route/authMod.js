@@ -13,7 +13,7 @@ export const Modmiddleware = (props) => {
                 <Navigate to={"/login"}/>
             );
         }
-        if (user.role !== "mod") {
+        if (user.role !== "mod" && user.role !== "admin") {
             return (
                 <Navigate to={"/"}/>
             )

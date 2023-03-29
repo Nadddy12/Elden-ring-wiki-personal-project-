@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import { Header } from "../../components/layout/Header.js"
+import { Footer } from "../../components/layout/Footer.js"
+import "./style/style.scss";
+// import { FetchPostForm } from "../../../helper/fetch.js";
 
 export const CreateSpell  = () => {
     
@@ -18,6 +21,7 @@ export const CreateSpell  = () => {
     
     const token = localStorage.getItem("jwt");
     
+    // const URL = (`/admin/add-equipment`);
     
     const handleChange = (e) => {
         const {name , value} = e.target;
@@ -31,7 +35,6 @@ export const CreateSpell  = () => {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
         try {
             
             const data = new FormData();
@@ -40,16 +43,19 @@ export const CreateSpell  = () => {
             data.append("damagetype", form.damagetype);
             data.append("damage", form.damage);
             data.append("image", form.image);
+            console.log(data.get("name"))
+            
             
         const res =  await fetch("http://abdulrahmanfakhri.ide.3wa.io:9602/admin/add-spell", {
             method: "POST",
             body: data,
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${token}`
             }
         });
         if (!res.ok) {
-            throw new Error("Failed to add spell");
+            const error = await res.json();
+            throw new Error(error.message);
         }
         const data1 = await res.json();
             console.log(data1.message);
@@ -61,35 +67,34 @@ export const CreateSpell  = () => {
     };
     
     return(
-        <main>
+        <>
+        <Header />
+        <main className="admin-form">
             <form>
-                {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
-                
-                <label>Name
-                <input htmlFor="Name" className="spell-form" type="text" name="name" onChange={handleChange} value={form.name} />
-                </label>
-                <br/>
-                <label>Damage-Type
-                <input htmlFor="Damage-Type" className="spell-form" type="text" name="damagetype" onChange={handleChange} value={form.damagetype} />
-                </label>
-                <br/>
-                <label>Damage
-                <input htmlFor="Damage" className="spell-form" type="number" name="damage" onChange={handleChange} value={form.damage} />
-                </label>
-                <br/>
-                <label>Type
-                <select htmlFor="Type" className="spell-form" name="type" onChange={handleChange} value={form.type}>
-                    <option value="Incantation">Incantation</option>
-                    <option value="Sorcer">Sorcer</option>
-                </select>
-                </label>
-                <br/>
-                <label>Image
-                <input htmlFor="Image" className="spell-form" type="file" name="image" onChange={handleflieChange} />
-                </label>
-                <br/>
-                <button onClick={handleSubmit}>Add</button>
+                <fieldset>
+                    <legend>Create Spell</legend>
+                    {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
+                    <label>Name</label>
+                    <input htmlFor="Name" className="equipment-form" type="text" name="name" onChange={handleChange} value={form.name} />
+                    
+                    <label>Damage-Type</label>
+                    <input htmlFor="Damage-Type" className="equipment-form" type="text" name="damagetype" onChange={handleChange} value={form.damagetype} />
+                    <label>Damage</label>
+                    <input htmlFor="Damage" className="equipment-form" type="number" name="damage" onChange={handleChange} value={form.damage} />
+                    <label>Type
+                    <select htmlFor="Type" className="equipment-form" name="type" onChange={handleChange} value={form.type}>
+                        <option value="none" selected>Select an Option</option>
+                        <option value="Incantation">Incantation</option>
+                        <option value="Sorcery">Sorcery</option>
+                    </select>
+                    </label>
+                    <label>Image</label>
+                    <input htmlFor="Image" className="equipment-form" type="file" name="image" onChange={handleflieChange} />
+                    <button onClick={handleSubmit}>Add</button>
+                </fieldset>
             </form>
         </main>
+        <Footer />
+        </>
     );
 };

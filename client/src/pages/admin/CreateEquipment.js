@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Header } from "../../components/layout/Header.js"
+import { Footer } from "../../components/layout/Footer.js"
+import "./style/style.scss";
 // import { FetchPostForm } from "../../../helper/fetch.js";
 
 export const CreateEquipment  = () => {
@@ -47,6 +50,7 @@ export const CreateEquipment  = () => {
             data.append("damage", form.damage);
             data.append("infusion", form.infusion);
             data.append("image", form.image);
+            console.log(data.get("name"))
             
             
         const res =  await fetch("http://abdulrahmanfakhri.ide.3wa.io:9602/admin/add-equipment", {
@@ -57,7 +61,8 @@ export const CreateEquipment  = () => {
             }
         });
         if (!res.ok) {
-            throw new Error("Failed to add equipment");
+            const error = await res.json();
+            throw new Error(error.message);
         }
         const data1 = await res.json();
             console.log(data1.message);
@@ -69,60 +74,57 @@ export const CreateEquipment  = () => {
     };
     
     return(
-        <main>
+        <>
+        <Header />
+        <main className="admin-form">
             <form>
-                {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
-                
-                <label>Name
-                <input htmlFor="Name" className="equipment-form" type="text" name="name" onChange={handleChange} value={form.name} />
-                </label>
-                <br/>
-                <label>Damage-Type
-                <input htmlFor="Damage-Type" className="equipment-form" type="text" name="damagetype" onChange={handleChange} value={form.damagetype.join(",")} />
-                </label>
-                <br/>
-                <label>Damage
-                <input htmlFor="Damage" className="equipment-form" type="number" name="damage" onChange={handleChange} value={form.damage} />
-                </label>
-                <br/>
-                <label>Infusion
-                <input htmlFor="Infusion" className="equipment-form" type="checkbox" name="infusion" onChange={handleChange} value={form.infusion} />
-                </label>
-                <br/>
-                <label>Type
-                <select htmlFor="Type" className="equipment-form" name="type" onChange={handleChange} value={form.type}>
-                    <option value="Daggers">Daggers</option>
-                    <option value="Straight Swords">Straight Swords</option>
-                    <option value="Greatswords">Greatswords</option>
-                    <option value="Colossal Swords">Colossal Swords</option>
-                    <option value="Thrusting Swords">Thrusting Swords</option>
-                    <option value="Heavy Thrusting Swords">Heavy Thrusting Swords</option>
-                    <option value="Curved Swords">Curved Swords</option>
-                    <option value="Curved Greatswords">Curved Greatswords</option>
-                    <option value="Katanas">Katanas</option>
-                    <option value="Twinblades">Twinblades</option>
-                    <option value="Axes">Axes</option>
-                    <option value="Greataxes">Greataxes</option>
-                    <option value="Hammers">Hammers</option>
-                    <option value="Flails">Flails</option>
-                    <option value="Great Hammers">Great Hammers</option>
-                    <option value="Colossal Weapons">Colossal Weapons</option>
-                    <option value="Spears">Spears</option>
-                    <option value="Great Spears">Great Spears</option>
-                    <option value="Halberds">Halberds</option>
-                    <option value="Reapers">Reapers</option>
-                    <option value="Whips">Whips</option>
-                    <option value="Fists">Fists</option>
-                    <option value="Claws">Claws</option>
-                </select>
-                </label>
-                <br/>
-                <label>Image
-                <input htmlFor="Image" className="equipment-form" type="file" name="image" onChange={handleflieChange} />
-                <br/>
-                </label>
-                <button onClick={handleSubmit}>Add</button>
+                <fieldset>
+                    <legend>Create Equipment</legend>
+                    {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
+                    <label>Name</label>
+                    <input htmlFor="Name" type="text" name="name" onChange={handleChange} value={form.name} />
+                    <label>Damage-Type  ( Seperate the type by using  ","  without space )</label>
+                    <input htmlFor="Damage-Type" type="text" name="damagetype" onChange={handleChange} value={form.damagetype.join(",")} />
+                    <label>Damage</label>
+                    <input htmlFor="Damage" type="number" name="damage" onChange={handleChange} value={form.damage} />
+                    <label>Infusion
+                    <input htmlFor="Infusion" type="checkbox" name="infusion" onChange={handleChange} value={form.infusion} />
+                    </label>
+                    <label>Type
+                    <select htmlFor="Type" name="type" onChange={handleChange} value={form.type}>
+                        <option value="none" selected>Select an Option</option>
+                        <option value="Daggers">Daggers</option>
+                        <option value="Straight Swords">Straight Swords</option>
+                        <option value="Greatswords">Greatswords</option>
+                        <option value="Colossal Swords">Colossal Swords</option>
+                        <option value="Thrusting Swords">Thrusting Swords</option>
+                        <option value="Heavy Thrusting Swords">Heavy Thrusting Swords</option>
+                        <option value="Curved Swords">Curved Swords</option>
+                        <option value="Curved Greatswords">Curved Greatswords</option>
+                        <option value="Katanas">Katanas</option>
+                        <option value="Twinblades">Twinblades</option>
+                        <option value="Axes">Axes</option>
+                        <option value="Greataxes">Greataxes</option>
+                        <option value="Hammers">Hammers</option>
+                        <option value="Flails">Flails</option>
+                        <option value="Great Hammers">Great Hammers</option>
+                        <option value="Colossal Weapons">Colossal Weapons</option>
+                        <option value="Spears">Spears</option>
+                        <option value="Great Spears">Great Spears</option>
+                        <option value="Halberds">Halberds</option>
+                        <option value="Reapers">Reapers</option>
+                        <option value="Whips">Whips</option>
+                        <option value="Fists">Fists</option>
+                        <option value="Claws">Claws</option>
+                    </select>
+                    </label>
+                    <label>Image</label>
+                    <input htmlFor="Image" type="file" name="image" accept="image/*" onChange={handleflieChange} />
+                    <button onClick={handleSubmit}>Add</button>
+                </fieldset>
             </form>
         </main>
+        <Footer />
+        </>
     );
 };

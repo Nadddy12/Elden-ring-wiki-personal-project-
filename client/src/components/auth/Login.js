@@ -2,6 +2,7 @@ import { Link , useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { useState } from "react";
 import { addUser } from "../../store/slices/user/userSlice.js";
+import "./style/style.scss";
 
 export const Login = () => {
     
@@ -41,15 +42,18 @@ export const Login = () => {
     
     
     return(
-        <main>
+        <main className="auth-form">
             <Link to={"/"}>Home Page</Link>
             <form>
-                {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
-                <label>email</label>
-                <input forhtml="email" type="email" name="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
-                <label>password</label>
-                <input forhtml="password" type="password" name="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
-                <button onClick={handleLogin}>Login</button>
+                <fieldset>
+                    <legend>Welcome back Tarnished</legend>
+                    {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
+                    <label>Email</label>
+                    <input forhtml="Email" type="email" name="email" onChange={(e) => setEmail(e.target.value)} value={email}/>
+                    <label>Password</label>
+                    <input forhtml="Password" type="password" name="password" onChange={(e) => setPassword(e.target.value)} value={password}/>
+                    <button onClick={handleLogin}>Login</button>
+                </fieldset>
             </form>
         </main>
     );

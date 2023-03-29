@@ -1,0 +1,60 @@
+@import "../../../assets/colors/colors.scss";
+
+.auth-form {
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    
+    a {
+        font-size: 26px;
+        margin: 40px 20px 20px;
+    }
+    
+    fieldset {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: 60px auto;
+        justify-content: space-around;
+        align-items: center;
+        box-sizing: border-box;
+        border: 15px solid #000;
+        border-left: none;
+        border-right: none;
+        background-color: $color1-background;
+        border-image: url("../../../assets/photo/gold-form-border.png") 200 round;
+        
+        legend {
+            font-size: 22px;
+            
+        }
+        
+        label {
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+        }
+        
+        input {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            background-color: $color2-background;
+            border: 2px double $color1-background inset;
+            border-radius: 5px;
+        }
+        
+        button {
+            background-color: $btn1;
+            border-radius: 5px;
+            margin: 30px 0;
+            padding: 10px 25px;
+            border: 0 none;
+        }
+        
+        button:hover {
+            background-color: $btn2;
+        }
+    }
+}
