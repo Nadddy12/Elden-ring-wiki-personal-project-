@@ -41,6 +41,7 @@ export const UserRoutes = [
 
 export const ModRoutes = [
     { path:"/create-blog" , element: <CreateBlog/>},
+    { path:"/control-panel" , element: <ControlPanel/> },
 ];
 
 export const AdminRoutes = [

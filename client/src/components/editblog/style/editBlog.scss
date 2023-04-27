@@ -1,0 +1,82 @@
+@import "../../../assets/colors/colors.scss";
+
+.modal-wrapper {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: $popup-background;
+    
+    .edit-blog {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50% , -50%);
+        width: 80%;
+        background-color: $color1-background;
+        padding: 15px;
+        border-radius: 7px;
+    }
+    
+    fieldset {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        box-sizing: border-box;
+        border-left: none;
+        border-right: none;
+        
+        legend {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        label {
+            width: 100%;
+            text-align: left;
+            padding: 15px;
+        }
+        
+        input {
+            width: 100%;
+            text-align: left;
+            padding: 20px;
+            background-color: $color2-background;
+            border: 2px double $color1-background inset;
+            border-radius: 5px;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 20px;
+            background-color: $color2-background;
+            border: 2px double $color1-background inset;
+            border-radius: 5px;
+        }
+        
+        .edit-blog-btn {
+            
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            
+            button {
+                background-color: $btn1;
+                border-radius: 5px;
+                margin: 30px 0;
+                padding: 10px 25px;
+                border: 0 none;
+            }
+        
+            button:hover {
+                background-color: $btn2;
+            }
+        }
+        
+    }
+}

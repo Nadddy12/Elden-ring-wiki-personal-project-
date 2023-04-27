@@ -4,7 +4,7 @@ import "./style/nav.scss";
 export const Nav = () => {
     return(
         <nav>
-            <Link to={"/"}>Home Page</Link>
+            <Link to={"/"}>Home</Link>
             <Link to={"/blog"}>Blogs</Link>
             <Link to={"/guide"}>Guides</Link>
             <Link to={"/equipment"}>Equipments</Link>

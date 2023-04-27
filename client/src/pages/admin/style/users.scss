@@ -8,10 +8,11 @@
     .userListContainer {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
     }
     
     .users {
-        width: 32%;
+        width: 45%;
         text-align: center;
         box-sizing:border-box;
         padding: 5px;

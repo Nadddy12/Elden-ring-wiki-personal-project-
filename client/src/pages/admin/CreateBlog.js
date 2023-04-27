@@ -17,12 +17,25 @@ export const CreateBlog = () => {
     
     const navigate = useNavigate();
     const token = localStorage.getItem("jwt");
-    const URL = ("/admin/create-article");
+    
+    
+    // handle input primer lettre et le rendre Majuscule
+    
+    const handleTitleInput = (e) => {
+        setTitle(e.target.value.replace(/^\w/, (c) => c.toUpperCase()));
+    }
+    
+    const handleContentInput = (e) => {
+        setContent(e.target.value.replace(/^\w/, (c) => c.toUpperCase()));
+    }
+    
+    // handle submit la forme
     
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const data = { title, content, type, userId: user.id };
+            const URL = user.role === "admin" ? "/admin/create-article" : "/mod/create-article";
             const res = await FetchPost(URL, data, token);
             console.log(res);
             navigate(`/control-panel`);
@@ -32,23 +45,24 @@ export const CreateBlog = () => {
         }
     };
     
+    
     return(
         <>
         <Header />
-        <main className="admin-form">
-            <form>
-                <fieldset>
-                    <legend>Create Article</legend>
-                    {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
-                    <label>Title</label>
-                    <input forhtml="Title" className="blog-title-form" type="text" name="" onChange={(e)=>setTitle(e.target.value)} value={title} />
-                    <label>Content</label>
-                    <textarea forhtml="Content" className="blog-content-form" name="content" onChange={(e)=>setContent(e.target.value)} value={content} >
-                    </textarea>
-                    <button onClick={handleSubmit}>Add</button>
-                </fieldset>
-            </form>
-        </main>
+            <main className="admin-form">
+                <form>
+                    <fieldset>
+                        <legend>Create Article</legend>
+                        {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
+                        <label>Title</label>
+                        <input forhtml="Title" className="blog-title-form" type="text" name="" onChange={handleTitleInput} value={title} />
+                        <label>Content</label>
+                        <textarea forhtml="Content" className="blog-content-form" name="content" onChange={handleContentInput} value={content} >
+                        </textarea>
+                        <button onClick={handleSubmit}>Add</button>
+                    </fieldset>
+                </form>
+            </main>
         <Footer />
         </>
     );

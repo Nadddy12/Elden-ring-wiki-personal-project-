@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 export const getAllBlogArticle = async (req , res) => {
     try{
-        const article = await Article.find({type:"blog"});
+        const article = await Article.find({type:"blog"}).populate({path: 'user', select: '-password'});
         res.status(200).json(article);
     }catch (err) {
         console.log(err);
@@ -35,7 +35,7 @@ export const getOneArticle = async (req , res) => {
     const id = req.params.id;
     
     try{
-        const article = await Article.findById(id).populate('user');
+        const article = await Article.findById(id).populate({path: 'user', select: '-password'});
         if(!article){
             return res.status(404).json({ message: "Article not found" });
         }
@@ -81,7 +81,7 @@ export const createArticle = async (req , res) => {
 
 export const updateArticle = async (req , res) => {
     const id = req.params.id;
-    const {title , content} = req.body;
+    const {title , content , link} = req.body;
     
     if (!req.params) {
         return res.status(400).json({ message: 'Missing required parameters' });
@@ -89,7 +89,8 @@ export const updateArticle = async (req , res) => {
     
     const update = {
         title,
-        content
+        content,
+        link
         };
     
     try {

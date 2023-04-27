@@ -1,0 +1,22 @@
+@import "../../../assets/colors/colors.scss";
+
+.blog-title {
+    padding: 10px 0;
+    word-wrap: break-word
+}
+
+.blog-content {
+    padding: 0 10px;
+}
+
+.btn-delete-blog , .btn-edit-blog {
+    background-color: transparent;
+    border: 2px solid $btn1;
+    padding: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.btn-delete-blog:hover , .btn-edit-blog:hover {
+    border-color: $btn2;
+}

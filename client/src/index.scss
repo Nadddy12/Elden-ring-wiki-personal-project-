@@ -4,7 +4,16 @@
 * {
     font-family: 'EB Garamond', serif;
     color: $font-3;
-    font-size: 16px;
+    font-size: 18px;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: Bold;
+}
+
+h3 {
+    font-size: 20px;
 }
 
 a {
@@ -19,8 +28,20 @@ html, body {
 
 body {
     background: url('assets/photo/e8u661wb0gx71.png')repeat center center fixed;
-    -webkit-background-size: cover;
+    background-size: cover;
     z-index: -1;
+}
+
+section {
+    width: 90%;
+    margin: 20px auto;
+    padding: 10px 5px;
+    background-color: $trans-background;
+}
+
+.errorMessage , .error {
+    font-size: 20px;
+    padding: 10px;
 }
 
 #root {

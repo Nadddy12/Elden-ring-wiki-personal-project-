@@ -24,7 +24,7 @@ export const signup = async (req , res) => {
            username,
            email,
            password:hash,
-           role
+           role:"user"
         });
         await user.save();
         
@@ -33,7 +33,8 @@ export const signup = async (req , res) => {
                 user: {
                 username: user.username,
                 email: user.email,
-                id: user._id
+                id: user._id,
+                role:user.role
             },
                 jwt
             });
