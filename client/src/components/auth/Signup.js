@@ -18,7 +18,7 @@ export const Signup = () => {
         e.preventDefault();
         try{
             let user = {username , email , password};
-                const res = await fetch("http://abdulrahmanfakhri.ide.3wa.io:9602/signup", {
+                const res = await fetch(`${process.env.REACT_APP_API_URL}/signup`, {
                 method:"post",
                 body:JSON.stringify(user),
                 headers: {

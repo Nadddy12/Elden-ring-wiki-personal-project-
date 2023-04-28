@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { FetchUpdate } from "../../helper/fetch.js";
 import "./style/editBlog.scss";
 
-export const EditBlog = ({ blog , closeEditModal }) => {
+export const EditBlog = ({ blog , closeEditModal , onBlogUpdate}) => {
     
     const {user} = useSelector(state => state);
     
@@ -31,8 +31,9 @@ export const EditBlog = ({ blog , closeEditModal }) => {
         e.preventDefault();
         const URL = user.role === "admin" ? `/admin/update-article/${id}` : `/mod/update-article/${id}`;
         try{
-            const res = FetchUpdate(URL , {title , content});
+            const res = await FetchUpdate(URL , {title , content});
             if (res) {
+                onBlogUpdate({ ...blog , title , content});
                 closeEditModal();
             }
         }catch(err) {
@@ -40,7 +41,8 @@ export const EditBlog = ({ blog , closeEditModal }) => {
         }
     };
     
-    const handleCancel = () => {
+    const handleCancel = (e) => {
+        e.preventDefault();
         closeEditModal();
     };
     

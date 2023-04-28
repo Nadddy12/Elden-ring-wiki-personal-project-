@@ -12,12 +12,12 @@ const token = getToken();
 export const FetchGet = async (URL) => {
     
     try {
-        const res = await fetch(`http://abdulrahmanfakhri.ide.3wa.io:9602${URL}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${getToken()}`
-        },
+        const res = await fetch(`${process.env.REACT_APP_API_URL}${URL}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${getToken()}`
+            },
         });
     if (!res.ok) {
         const error = await res.json();
@@ -33,7 +33,7 @@ export const FetchGet = async (URL) => {
 export const FetchPost = async (URL , data) => {
     
     try{
-        const res = await fetch(`http://abdulrahmanfakhri.ide.3wa.io:9602${URL}`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}${URL}`, {
             method:"POST",
             body:JSON.stringify(data),
             headers: {
@@ -55,12 +55,12 @@ export const FetchPost = async (URL , data) => {
 export const FetchDelete = async (URL) => {
     
     try {
-        const res = await fetch(`http://abdulrahmanfakhri.ide.3wa.io:9602${URL}`, {
-        method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${getToken()}`
-        },
+        const res = await fetch(`${process.env.REACT_APP_API_URL}${URL}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': `Bearer ${getToken()}`
+            },
         });
     if (!res.ok) {
         const error = await res.json();
@@ -76,7 +76,7 @@ export const FetchDelete = async (URL) => {
 export const FetchUpdate = async (URL , data) => {
     
     try{
-        const res = await fetch(`http://abdulrahmanfakhri.ide.3wa.io:9602${URL}`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}${URL}`, {
             method:"PUT",
             body:JSON.stringify(data),
             headers: {

@@ -19,7 +19,7 @@ export const CreateBlog = () => {
     const token = localStorage.getItem("jwt");
     
     
-    // handle input primer lettre et le rendre Majuscule
+    // handle input first letter and make big latter
     
     const handleTitleInput = (e) => {
         setTitle(e.target.value.replace(/^\w/, (c) => c.toUpperCase()));
@@ -29,7 +29,7 @@ export const CreateBlog = () => {
         setContent(e.target.value.replace(/^\w/, (c) => c.toUpperCase()));
     }
     
-    // handle submit la forme
+    // handle submit form
     
     const handleSubmit = async (e) => {
         e.preventDefault();

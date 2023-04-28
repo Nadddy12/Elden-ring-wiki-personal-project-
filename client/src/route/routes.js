@@ -18,7 +18,7 @@ import { Users } from "../pages/admin/users.js";
 import { Signup } from "../components/auth/Signup.js";
 import { Login } from "../components/auth/Login.js";
 import { Logout } from "../components/auth/Logout.js";
-import { CreateCommentaire } from "../pages/commentaire/CreateCommentaire.js";
+
 
 export const PublicRoutes = [
     { path:"/" , element: <Home/>},
@@ -34,7 +34,6 @@ export const PublicRoutes = [
 ];
 
 export const UserRoutes = [
-    { path:"/commentaire/:id" , element: <CreateCommentaire/> },
     { path:"/dashboard" , element: <Dashboard/> },
     { path:"/article/:id" , element: <OneBlog/>},
 ];

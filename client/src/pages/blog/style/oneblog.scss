@@ -1,22 +1,60 @@
 @import "../../../assets/colors/colors.scss";
 
-.blog-title {
-    padding: 10px 0;
-    word-wrap: break-word
-}
 
 .blog-content {
     padding: 0 10px;
+    
+    .blog-title {
+    padding: 10px 0;
+    word-wrap: break-word
+    }
 }
 
-.btn-delete-blog , .btn-edit-blog {
+.btn-delete-blog , .btn-edit-blog , .btn-create-comment{
     background-color: transparent;
     border: 2px solid $btn1;
     padding: 4px;
     cursor: pointer;
     margin-left: 5px;
+    
+    &:hover {
+        border-color: $btn2;
+    }
 }
 
-.btn-delete-blog:hover , .btn-edit-blog:hover {
-    border-color: $btn2;
+.comments {
+    width: 95%;
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: $comment-background;
+    border-radius: 7px;
+    
+    .comments-list {
+        width: 90%;
+        margin: 15px auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: left;
+        background-color: $comment-background;
+        border-radius: 7px;
+        
+        .comments-list-user {
+            width: 25%;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 5px;
+            margin: 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .comments-list-content {
+            width: 75%;
+            height: 100%;
+            box-sizing: border-box;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            margin: 0;
+        }
+    }
 }

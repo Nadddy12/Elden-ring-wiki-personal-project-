@@ -1,7 +1,9 @@
 import { Header } from "../../components/layout/Header.js";
 import { Footer } from "../../components/layout/Footer.js";
 import { EditBlog } from "../../components/editblog/EditBlog.js";
+import { CreateComment } from "../../components/comment/CreateComment.js";
 import { FetchGet , FetchDelete } from "../../helper/fetch.js";
+
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams , Link} from "react-router-dom";
@@ -14,13 +16,15 @@ export const OneBlog = () =>{
     
     const [blog , setBlog] = useState({});
     const [commentaire , setCommentaire] = useState([]);
-    const [isEditing , setIsEditing] = useState(false);
+    const [isEditingBlog , setIsEditingBlog] = useState(false);
+    const [isCreateComment , setIsCreateComment] = useState(false);
     const [error, setError] = useState(null);
     
     const {id} = useParams();
     const URL = `/article/${id}`;
     const URL2 = `/article/${id}/commentaire`;
     
+    //fetch get blog
     useEffect(() => {
         const fetchData = async () =>{
             try{
@@ -33,7 +37,7 @@ export const OneBlog = () =>{
         fetchData();
     }, []);
     
-    
+    //fetch get comments
     useEffect(() => {
         const fetchData = async () =>{
             try{
@@ -45,7 +49,8 @@ export const OneBlog = () =>{
         };
         fetchData();
     }, []);
-
+    
+    //fetch delete blog
     const deleteBlog = async (role) => {
         const URL = role === 'admin' ? `/admin/delete-article/${id}` : `/mod/delete-article/${id}`;
         try {
@@ -55,42 +60,67 @@ export const OneBlog = () =>{
         }
     }
     
+    //update blog
+    const updateBlog = (updateBlog) => {
+        setBlog(updateBlog);
+    }
+    
+    // pop up window handler for edit blog
     const openEditModal = () => {
-        setIsEditing(true);
+        setIsEditingBlog(true);
     };
     
     const closeEditModal = () => {
-        setIsEditing(false);
+        setIsEditingBlog(false);
+    };
+    
+    //pop up window handler for create comment
+    const openCreateCommentModal = () => {
+        setIsCreateComment(true);
+    };
+    
+    const closeCreateCommentModal = () => {
+        setIsCreateComment(false);
     };
     
     //rendering part
     
+    //btn for blog
     const btnEditBlog = (user.role === 'admin' || ( user.role === 'mod' && blog.user && user.username === blog.user.username )) ? (
         <button className="btn-edit-blog" onClick={openEditModal}>
         Edit post
         </button>
-        ) : null;
+    ) : null;
     
     const btnDeleteBlog = (user.role === 'admin' || ( user.role === 'mod' && blog.user && user.username === blog.user.username )) ? (
         <button className="btn-delete-blog" onClick={() => deleteBlog(user.role)}>
         Delete post
         </button>
-        ) : null;
+    ) : null;
         
+    //btn for comment
+    const btnCreateComment = (user.role === 'user' || user.role === 'admin' || user.role === 'mod') ? (
+        <button className="btn-create-comment" onClick={openCreateCommentModal}>
+        Comment
+        </button>
+    ): null;
+    
+    // comment 
     const contentComment = error ? (
         <div className="errorMessage error" style={{ color: "red" }}>{error}</div>
         ) : (
         <div className="comments" >
-            <Link className="comment-btn" to={`/commentaire/${id}`}>Comment on the Article</Link>
-                {commentaire.map((ele, i) => (
-                <div className="comments-list" key={i}>
-                    <p className="comments-list-user">{ele.user.username}</p>
-                    <p className="comments-list-comment">{ele.content}</p>
-                </div>
-                ))}
+            {isCreateComment && <CreateComment closeCreateCommentModal={closeCreateCommentModal} />}
+            {commentaire.map((ele, i) => (
+            <div className="comments-list" key={i}>
+                <p className="comments-list-user">{ele.user.username}</p>
+                <p className="comments-list-content">{ele.content}</p>
+            </div>
+            ))}
         </div> 
     );
     
+    // main blog
     const content = error ? (
         <div className="errorMessage error" style={{ color: "red" }}>{error}</div>
         ) : (
@@ -111,6 +141,7 @@ export const OneBlog = () =>{
                         <p className="blog-content">{blog.content}</p>
                     </div>
                 )}
+                {btnCreateComment}
                 {contentComment}
             </section>
         </main>
@@ -120,7 +151,7 @@ export const OneBlog = () =>{
         <>
             <Header />
             {content}
-            {isEditing && <EditBlog blog={blog} closeEditModal={closeEditModal} />}
+            {isEditingBlog && <EditBlog blog={blog} closeEditModal={closeEditModal} onBlogUpdate={updateBlog} />}
             <Footer />
         </>
     );

@@ -3,7 +3,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 export const fetchUser = createAsyncThunk(
     'pages/Login.js',
     async () => {
-        const response = await fetch('http://abdulrahmanfakhri.ide.3wa.io:9602/login');
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/login`);
         return await response.json();
     }
 );
