@@ -62,7 +62,6 @@
         width: 25%;
         height: 100%;
         text-align: center;
-        cursor: pointer;
         
         svg {
             margin-top: 25px;
@@ -91,6 +90,7 @@
                 &:hover {
                     transition: all 0.3s ease;
                     transform: translateY(-4px);
+                    cursor: pointer;
                 }
             }
             
@@ -129,6 +129,7 @@
             
             @include tablette {
                 flex-direction: row;
+                cursor: pointer;
             }
         }
     }

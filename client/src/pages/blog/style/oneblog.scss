@@ -39,7 +39,7 @@
         background-color: $comment-background;
         border-radius: 7px;
         
-        &:hover .comment-control .btn-delet-comment-blog {
+        &:hover .comment-control .btn-delet-comment-blog , &:hover .comment-control .btn-edit-comment  {
             display: block;
         }
         
@@ -49,7 +49,7 @@
             margin: 0;
             width: 60%;
             
-            .btn-delet-comment-blog {
+            .btn-delet-comment-blog , .btn-edit-comment {
                 display: none;
                 border: none;
                 background-color: transparent;
@@ -70,6 +70,7 @@
         
         .comments-list-content {
             width: 100%;
+            word-wrap: break-word
             box-sizing: border-box;
             box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
             padding: 15px;

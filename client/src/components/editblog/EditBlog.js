@@ -23,8 +23,14 @@ export const EditBlog = ({ blog , closeEditModal , onBlogUpdate}) => {
     const handleTitleChange = (e) => {
         setTitle(e.target.value);
     };
+    
     const handleContentChange = (e) => {
         setContent(e.target.value);
+    };
+    
+    const handleCancel = (e) => {
+        e.preventDefault();
+        closeEditModal();
     };
     
     const handleSubmit = async (e) => {
@@ -39,11 +45,6 @@ export const EditBlog = ({ blog , closeEditModal , onBlogUpdate}) => {
         }catch(err) {
             setError(err.message);
         }
-    };
-    
-    const handleCancel = (e) => {
-        e.preventDefault();
-        closeEditModal();
     };
     
     return (

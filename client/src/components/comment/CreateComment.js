@@ -2,7 +2,7 @@ import { useState  } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { FetchPost } from "../../helper/fetch.js";
-import "./style/createComment.scss";
+import "./style/commentcontrol.scss";
 
 export const CreateComment = ({closeCreateCommentModal , onCommentCreate}) => {
     
@@ -30,9 +30,10 @@ export const CreateComment = ({closeCreateCommentModal , onCommentCreate}) => {
             const URL = `/user/article/${id}/create-commentaire`;
             const res = await FetchPost(URL, data);
             if (res) {
-                const newComment = { _id: res._id , content , user: { username: user.username } };
+                const newComment = { _id:res.commentaire._id , content:res.commentaire.content , user: { username: user.username } };
                 onCommentCreate(newComment);
                 closeCreateCommentModal();
+                console.log(res);
             }
         }catch(err) {
             setError(err);

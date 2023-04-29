@@ -2,6 +2,7 @@ import { Header } from "../../components/layout/Header.js";
 import { Footer } from "../../components/layout/Footer.js";
 import { EditBlog } from "../../components/editblog/EditBlog.js";
 import { CreateComment } from "../../components/comment/CreateComment.js";
+import { EditComment } from "../../components/comment/EditComment.js";
 import { DeleteComment } from "../../components/comment/DeleteComment.js";
 import { FetchGet , FetchDelete } from "../../helper/fetch.js";
 
@@ -19,6 +20,8 @@ export const OneBlog = () =>{
     const [comments , setComments] = useState([]);
     const [isEditingBlog , setIsEditingBlog] = useState(false);
     const [isCreateComment , setIsCreateComment] = useState(false);
+    const [isEditingComment , setIsEditingComment] = useState(false);
+    const [editCommentIndex, setEditCommentIndex] = useState(-1);
     const [error, setError] = useState(null);
     
     const {id} = useParams();
@@ -66,6 +69,17 @@ export const OneBlog = () =>{
         setBlog(updateBlog);
     }
     
+    //update comment
+    const updateComment = (updatedComment) => {
+        const updatedComments = comments.map((c) => {
+            if (c._id === updatedComment._id) {
+                return updatedComment;
+            }
+                return c;
+        });
+        setComments(updatedComments);
+    };
+    
     // pop up window handler for edit blog
     const openEditModal = () => {
         setIsEditingBlog(true);
@@ -82,6 +96,16 @@ export const OneBlog = () =>{
     
     const closeCreateCommentModal = () => {
         setIsCreateComment(false);
+    };
+    
+    //pop up window handler for edit comment
+    const openEditCommentModal = (index) => {
+        setEditCommentIndex(index);
+        setIsEditingComment(true);
+    };
+    
+    const closeEditCommentModal = () => {
+        setIsEditingComment(false);
     };
     
     //rendering part
@@ -104,12 +128,20 @@ export const OneBlog = () =>{
         </button>
     ) : null;
         
-    //btn for comment
+    //btn for comment create and edit
     const btnCreateComment = (user.role === 'user' || user.role === 'admin' || user.role === 'mod') ? (
         <button className="btn-create-comment" onClick={openCreateCommentModal}>
         Comment
         </button>
     ): null;
+    
+    const btnEditComment = (ele , i) => {
+        return (ele.user && user.username === ele.user.username) ? (
+                    <button className="btn-edit-comment" onClick={() => openEditCommentModal(i)}>
+                    Edit
+                    </button>
+                ): null;
+    }
     
     // comment 
     const contentComment = error ? (
@@ -121,14 +153,17 @@ export const OneBlog = () =>{
             {comments.map((ele, i) => (
             <div className="comments-list" key={i}>
                 {ele.user ? (
-                    <p className="comments-list-user">{ele.user.username}</p>
+                    <p className="comments-list-user">{ele.user.username} : </p>
                 ) : (
-                    <p className="comments-list-user">Deleted user</p>
+                    <p className="comments-list-user">Deleted user : </p>
                 )}
                 <div className="comment-control">
+                    {btnEditComment(ele , i)}
                     {<DeleteComment comment={ele} commentId={ele._id} 
                     onCommentDelete={(comment)=>setComments(comments.filter((c) => c._id !== comment._id))}/>}
                 </div>
+                {(isEditingComment && editCommentIndex === i) && <EditComment comment={ele} commentId={ele._id}
+                closeEditCommentModal={closeEditCommentModal} onCommentUpdate={updateComment} />}
                 <p className="comments-list-content">{ele.content}</p>
             </div>
             ))}
