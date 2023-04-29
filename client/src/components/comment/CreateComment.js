@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { FetchPost } from "../../helper/fetch.js";
 import "./style/createComment.scss";
 
-export const CreateComment = ({closeCreateCommentModal}) => {
+export const CreateComment = ({closeCreateCommentModal , onCommentCreate}) => {
     
     const {user} = useSelector(state => state);
     
@@ -30,8 +30,9 @@ export const CreateComment = ({closeCreateCommentModal}) => {
             const URL = `/user/article/${id}/create-commentaire`;
             const res = await FetchPost(URL, data);
             if (res) {
+                const newComment = { _id: res._id , content , user: { username: user.username } };
+                onCommentCreate(newComment);
                 closeCreateCommentModal();
-                console.log(res);
             }
         }catch(err) {
             setError(err);

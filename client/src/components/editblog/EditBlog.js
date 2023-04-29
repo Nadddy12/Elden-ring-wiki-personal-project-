@@ -54,9 +54,19 @@ export const EditBlog = ({ blog , closeEditModal , onBlogUpdate}) => {
                         <legend>Edit Blog</legend>
                         {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
                         <label>Title</label>
-                        <input forhtml="Title" className="blog-title-form" type="text" name="" onChange={handleTitleChange} value={title} />
+                        <input 
+                        forhtml="Title" 
+                        className="blog-title-form" 
+                        type="text" 
+                        name="title" 
+                        onChange={handleTitleChange} 
+                        value={title} />
                         <label>Content</label>
-                        <textarea forhtml="Content" className="blog-content-form" name="content" onChange={handleContentChange} value={content} >
+                        <textarea forhtml="Content" 
+                        className="blog-content-form" 
+                        name="content" 
+                        onChange={handleContentChange} 
+                        value={content} >
                         </textarea>
                         <div className="edit-blog-btn">
                             <button onClick={handleSubmit}>Save</button>

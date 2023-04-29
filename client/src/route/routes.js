@@ -30,12 +30,13 @@ export const PublicRoutes = [
     { path:"/equipment" , element: <Equipment/>},
     { path:"/equipment/:id" , element: <OneEquipment/>},
     { path:"/spell" , element: <Spell/>},
-    { path:"/spell/:id" , element: <OneSpell/>}
+    { path:"/spell/:id" , element: <OneSpell/>},
+    { path:"/article/:id" , element: <OneBlog/>},
 ];
 
 export const UserRoutes = [
     { path:"/dashboard" , element: <Dashboard/> },
-    { path:"/article/:id" , element: <OneBlog/>},
+    
 ];
 
 export const ModRoutes = [

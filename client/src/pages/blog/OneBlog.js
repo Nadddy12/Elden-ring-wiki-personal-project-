@@ -2,6 +2,7 @@ import { Header } from "../../components/layout/Header.js";
 import { Footer } from "../../components/layout/Footer.js";
 import { EditBlog } from "../../components/editblog/EditBlog.js";
 import { CreateComment } from "../../components/comment/CreateComment.js";
+import { DeleteComment } from "../../components/comment/DeleteComment.js";
 import { FetchGet , FetchDelete } from "../../helper/fetch.js";
 
 import { useEffect, useState } from "react";
@@ -15,7 +16,7 @@ export const OneBlog = () =>{
     const {user} = useSelector(state => state);
     
     const [blog , setBlog] = useState({});
-    const [commentaire , setCommentaire] = useState([]);
+    const [comments , setComments] = useState([]);
     const [isEditingBlog , setIsEditingBlog] = useState(false);
     const [isCreateComment , setIsCreateComment] = useState(false);
     const [error, setError] = useState(null);
@@ -42,7 +43,7 @@ export const OneBlog = () =>{
         const fetchData = async () =>{
             try{
                 const res = await FetchGet(URL2);
-                setCommentaire(res);
+                setComments(res);
             }catch(err){
                 setError(err.message);
             }
@@ -85,7 +86,12 @@ export const OneBlog = () =>{
     
     //rendering part
     
-    //btn for blog
+    //none user
+    const noneUser = (!user.role) ? (
+        <p>If you wish to comment on the post <Link className="link-in-blog" to={"/signup"}>Sign up</Link> or <Link className="link-in-blog" to={"/login"}>Log in</Link></p>
+    ) : null;
+    
+    //btn for blog edit and delete
     const btnEditBlog = (user.role === 'admin' || ( user.role === 'mod' && blog.user && user.username === blog.user.username )) ? (
         <button className="btn-edit-blog" onClick={openEditModal}>
         Edit post
@@ -110,10 +116,19 @@ export const OneBlog = () =>{
         <div className="errorMessage error" style={{ color: "red" }}>{error}</div>
         ) : (
         <div className="comments" >
-            {isCreateComment && <CreateComment closeCreateCommentModal={closeCreateCommentModal} />}
-            {commentaire.map((ele, i) => (
+            {isCreateComment && <CreateComment closeCreateCommentModal={closeCreateCommentModal} 
+            onCommentCreate={(newComment) => setComments([...comments , newComment])}/>}
+            {comments.map((ele, i) => (
             <div className="comments-list" key={i}>
-                <p className="comments-list-user">{ele.user.username}</p>
+                {ele.user ? (
+                    <p className="comments-list-user">{ele.user.username}</p>
+                ) : (
+                    <p className="comments-list-user">Deleted user</p>
+                )}
+                <div className="comment-control">
+                    {<DeleteComment comment={ele} commentId={ele._id} 
+                    onCommentDelete={(comment)=>setComments(comments.filter((c) => c._id !== comment._id))}/>}
+                </div>
                 <p className="comments-list-content">{ele.content}</p>
             </div>
             ))}
@@ -141,6 +156,7 @@ export const OneBlog = () =>{
                         <p className="blog-content">{blog.content}</p>
                     </div>
                 )}
+                {noneUser}
                 {btnCreateComment}
                 {contentComment}
             </section>

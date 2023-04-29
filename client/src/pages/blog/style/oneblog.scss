@@ -30,31 +30,58 @@
     background-color: $comment-background;
     border-radius: 7px;
     
+    
     .comments-list {
         width: 90%;
         margin: 15px auto;
         display: flex;
         flex-wrap: wrap;
-        justify-content: left;
         background-color: $comment-background;
         border-radius: 7px;
         
+        &:hover .comment-control .btn-delet-comment-blog {
+            display: block;
+        }
+        
+        .comment-control {
+            display: flex;
+            justify-content: right;
+            margin: 0;
+            width: 60%;
+            
+            .btn-delet-comment-blog {
+                display: none;
+                border: none;
+                background-color: transparent;
+                color : $btn3;
+                cursor: pointer
+            }
+        }
+        
+        
         .comments-list-user {
-            width: 25%;
-            height: 100%;
+            width: 35%;
             box-sizing: border-box;
+            text-align: center;
             padding: 5px;
             margin: 0;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
         
         .comments-list-content {
-            width: 75%;
-            height: 100%;
+            width: 100%;
             box-sizing: border-box;
             box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
             padding: 15px;
             margin: 0;
         }
+    }
+}
+
+.link-in-blog {
+    color: $btn3;
+    
+    &:hover {
+        text-decoration: underline;
     }
 }

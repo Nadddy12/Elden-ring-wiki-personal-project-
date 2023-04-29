@@ -14,7 +14,7 @@ export const Header = () => {
                 <div className="userInterface">
                     <p>Welcome back <span className="username-header">{user.username.toUpperCase()}</span> Tarnished</p>
                     <div className="menu">
-                        <div className="menu-trigger"><BsList /></div>
+                        <BsList />
                         <div className="menu-dropdown">
                             <Link className="header-links" to={"/logout"}>Log out</Link>
                         </div>
@@ -24,7 +24,7 @@ export const Header = () => {
                 <div className="userInterface">
                     <p>Welcome back <span className="username-header">{user.username.toUpperCase()}</span> Tarnished</p>
                     <div className="menu">
-                        <div className="menu-trigger"><BsList /></div>
+                        <BsList />
                         <div className="menu-dropdown">
                             <Link className="header-links" to={"/control-panel"}>Administrator</Link>
                             <Link className="header-links" to={"/logout"}>Log out</Link>
@@ -35,7 +35,7 @@ export const Header = () => {
                 <div className="userInterface">
                     <p>Welcome back <span className="username-header">{user.username.toUpperCase()}</span> Tarnished</p>
                     <div className="menu">
-                        <div className="menu-trigger"><BsList /></div>
+                        <BsList />
                         <div className="menu-dropdown">
                             <Link className="header-links" to={"/control-panel"}>Adminisitorater</Link>
                             <Link className="header-links" to={"/logout"}>Log out</Link>
@@ -46,7 +46,7 @@ export const Header = () => {
                 <div className="userInterface">
                     <p>Guest</p>
                     <div className="menu">
-                        <div className="menu-trigger"><BsList /></div>
+                        <BsList />
                         <div className="menu-dropdown">
                             <Link className="header-links" to={"/signup"}>Sign up</Link>
                             <Link className="header-links" to={"/login"}>Log in</Link>
