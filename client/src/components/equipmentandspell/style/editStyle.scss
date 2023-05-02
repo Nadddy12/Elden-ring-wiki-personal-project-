@@ -1,0 +1,118 @@
+@import "../../../assets/colors/colors.scss";
+
+
+.modal-wrapper {
+    position:fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background-color: $popup-background;
+    
+    .edit-equipment , .edit-spell{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50% , -50%);
+        width: 80%;
+        background-color: $color1-background;
+        padding: 15px;
+        border-radius: 7px;
+    }
+    
+    fieldset {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: 60px auto;
+        justify-content: space-around;
+        align-items: center;
+        box-sizing: border-box;
+        border: 15px solid #000;
+        border-left: none;
+        border-right: none;
+        background-color: $color1-background;
+        border-image: url("../../../assets/photo/gold-form-border.png") 200 round;
+        
+        legend {
+            font-size: 22px;
+        }
+        
+        label {
+            width: 100%;
+            text-align: left;
+            padding: 15px;
+        }
+        
+        input {
+            width: 100%;
+            text-align: left;
+            padding: 20px;
+            background-color: $color2-background;
+            border: 2px double $color1-background inset;
+            border-radius: 5px;
+        }
+        
+        input[type="checkbox"] {
+           height: 20px;
+           width: 20px;
+           margin: 20px 20px;
+           accent-color: $fifth-color; 
+           cursor: pointer;
+        }
+        
+        ::-webkit-file-upload-button {
+            color: $font-3;
+            background-color: $btn1;
+            padding: 20px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        ::-webkit-file-upload-button:hover {
+            background-color: $btn2;
+            cursor: pointer;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 20px;
+            background-color: $color2-background;
+            border: 2px double $color1-background inset;
+            border-radius: 5px;
+        }
+        
+        select {
+            width: 50%;
+            text-align: left;
+            padding: 20px;
+            margin: 20px;
+            background-color: $color2-background;
+            border: 2px double $color1-background inset;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .edit-equipment-btn , .edit-spell-btn{
+            
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            
+            button {
+                background-color: $btn1;
+                border-radius: 5px;
+                margin: 30px 0;
+                padding: 10px 25px;
+                border: 0 none;
+                
+                &:hover {
+                    background-color: $btn2;
+                }
+            }
+        }
+    }
+}

@@ -9,6 +9,7 @@ nav {
     background-color: $nav2-color;
     height: 30px;
     align-items: center;
+    z-index: 99;
     
     a {
         color:$black;

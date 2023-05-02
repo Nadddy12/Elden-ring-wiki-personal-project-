@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { FetchPostForm } from "../../helper/fetch.js";
 import { Header } from "../../components/layout/Header.js"
 import { Footer } from "../../components/layout/Footer.js"
 import "./style/style.scss";
-// import { FetchPostForm } from "../../../helper/fetch.js";
+
 
 export const CreateEquipment  = () => {
     
@@ -15,14 +16,9 @@ export const CreateEquipment  = () => {
         type:"",
         image: null,
     });
-    
     const [error , setError] = useState(null);
     
     const navigate = useNavigate();
-    
-    const token = localStorage.getItem("jwt");
-    
-    // const URL = (`/admin/add-equipment`);
     
     const handleChange = (e) => {
         const {name , value} = e.target;
@@ -50,22 +46,9 @@ export const CreateEquipment  = () => {
             data.append("damage", form.damage);
             data.append("infusion", form.infusion);
             data.append("image", form.image);
-            console.log(data.get("name"))
             
-            
-        const res =  await fetch("http://abdulrahmanfakhri.ide.3wa.io:9602/admin/add-equipment", {
-            method: "POST",
-            body: data,
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        if (!res.ok) {
-            const error = await res.json();
-            throw new Error(error.message);
-        }
-        const data1 = await res.json();
-            console.log(data1.message);
+            const URL = `/admin/add-equipment`
+            const res = await FetchPostForm(URL , data )
             navigate(`/control-panel`);
         } catch (err) {
             console.log(err);
@@ -92,7 +75,7 @@ export const CreateEquipment  = () => {
                     </label>
                     <label>Type
                     <select htmlFor="Type" name="type" onChange={handleChange} value={form.type}>
-                        <option value="none" selected>Select an Option</option>
+                        <option value="none">Select an Option</option>
                         <option value="Daggers">Daggers</option>
                         <option value="Straight Swords">Straight Swords</option>
                         <option value="Greatswords">Greatswords</option>

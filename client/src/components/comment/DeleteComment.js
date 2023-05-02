@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { FetchDelete } from "../../helper/fetch.js";
 

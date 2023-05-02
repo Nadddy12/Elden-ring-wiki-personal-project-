@@ -1,0 +1,50 @@
+@import "../../../assets/colors/colors.scss";
+
+.guide-wrapper {
+    margin: 30px auto;
+    width: 95%;
+    
+    .btn-wrapper {
+        display: flex;
+        
+        .btn-edit-guide , .btn-delete-guide{
+            display: none;
+            background-color: transparent;
+            border: 2px solid $btn1;
+            padding: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+            
+            &:hover {
+                border-color: $btn2;
+            }
+        }
+    }
+    
+    .guide-title {
+        margin-left: 10px;
+        word-wrap: break-word;
+    }
+    
+    .youtube-link {
+        margin: 0 auto;
+        width: 90%;
+        height: 200px;
+        
+        .youtube-video {
+            width: 100%;
+            height: 100%;
+            box-shadow: 2px 2px 12px -2px #fff8dc;
+            border-radius: 7px;
+        }
+    }
+    
+    .guide-content {
+        padding: 7px;
+        word-wrap: break-word;
+    }
+    
+    &:hover .btn-edit-guide , &:hover .btn-delete-guide{
+        display: block;
+    }
+}

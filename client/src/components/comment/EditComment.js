@@ -42,7 +42,6 @@ export const EditComment = ({ comment , commentId , closeEditCommentModal , onCo
                     {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
                     <textarea
                     className="write-comment"
-                    placeholder="Edit your comment"
                     name="content"
                     onChange={handleContentChange} value={content} >
                     </textarea>

@@ -16,7 +16,6 @@ export const CreateBlog = () => {
     const [error , setError] = useState(null);
     
     const navigate = useNavigate();
-    const token = localStorage.getItem("jwt");
     
     
     // handle input first letter and make big latter
@@ -36,7 +35,7 @@ export const CreateBlog = () => {
         try {
             const data = { title, content, type, userId: user.id };
             const URL = user.role === "admin" ? "/admin/create-article" : "/mod/create-article";
-            const res = await FetchPost(URL, data, token);
+            const res = await FetchPost(URL, data);
             console.log(res);
             navigate(`/control-panel`);
         } catch (err) {

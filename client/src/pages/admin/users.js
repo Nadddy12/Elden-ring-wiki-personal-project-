@@ -79,10 +79,10 @@ const content = error ? (
                     <div className="modification">
                         <div className="users-modification">
                             <label>User
-                            <input type="checkbox" checked={checkedRoles[ele._id] !== "mod"} onChange={() => handleRoleChange(ele._id, "mod")}/>
+                            <input type="checkbox" checked={checkedRoles[ele._id] === "mod"} onChange={() => handleRoleChange(ele._id, "mod")}/>
                             </label>
                             <label>Mod
-                            <input type="checkbox" checked={checkedRoles[ele._id] === "mod"} onChange={() => handleRoleChange(ele._id, "user")}/>
+                            <input type="checkbox" checked={checkedRoles[ele._id] !== "mod"} onChange={() => handleRoleChange(ele._id, "user")}/>
                             </label>
                         </div>
                         <button onClick={() => handleDelete(ele._id)}>Delete</button>

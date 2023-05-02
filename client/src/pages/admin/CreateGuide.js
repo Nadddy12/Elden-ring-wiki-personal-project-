@@ -46,12 +46,28 @@ export const CreateGuide = () => {
                     <legend>Create Guide</legend>
                     {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
                     <label>Title</label>
-                    <input forhtml="Title" type="text" name="title" onChange={(e)=>setTitle(e.target.value)} value={title} />
+                    <input forhtml="Title" 
+                    type="text" 
+                    name="title"
+                    placeholder="Wrtie the title"
+                    onChange={(e)=>setTitle(e.target.value)} 
+                    value={title} />
                     <label>Content</label>
-                    <textarea forhtml="Content" name="content" onChange={(e)=>setContent(e.target.value)} value={content} >
+                    <textarea 
+                    forhtml="Content" 
+                    name="content" 
+                    placeholder="Write the content"
+                    onChange={(e)=>setContent(e.target.value)} 
+                    value={content} >
                     </textarea>
                     <label>Link Youtube video (URL)</label>
-                    <input forhtml="Link" type="text" name="link" onChange={(e)=>setLink(embedvideo(e.target.value))} value={link} />
+                    <input 
+                    forhtml="Link" 
+                    type="text" 
+                    name="link" 
+                    placeholder="Past the URL from Youtube"
+                    onChange={(e)=>setLink(embedvideo(e.target.value))} 
+                    value={link} />
                     <button onClick={handleSubmit}>Add</button>
                 </fieldset>
             </form>

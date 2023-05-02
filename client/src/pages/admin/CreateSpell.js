@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { FetchPostForm } from "../../helper/fetch.js";
 import { Header } from "../../components/layout/Header.js"
 import { Footer } from "../../components/layout/Footer.js"
 import "./style/style.scss";
-// import { FetchPostForm } from "../../../helper/fetch.js";
 
 export const CreateSpell  = () => {
     
@@ -14,14 +14,9 @@ export const CreateSpell  = () => {
         type:"",
         image: null,
     });
-    
     const [error , setError] = useState(null);
     
     const navigate = useNavigate();
-    
-    const token = localStorage.getItem("jwt");
-    
-    // const URL = (`/admin/add-equipment`);
     
     const handleChange = (e) => {
         const {name , value} = e.target;
@@ -43,22 +38,10 @@ export const CreateSpell  = () => {
             data.append("damagetype", form.damagetype);
             data.append("damage", form.damage);
             data.append("image", form.image);
-            console.log(data.get("name"))
             
             
-        const res =  await fetch("http://abdulrahmanfakhri.ide.3wa.io:9602/admin/add-spell", {
-            method: "POST",
-            body: data,
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
-        if (!res.ok) {
-            const error = await res.json();
-            throw new Error(error.message);
-        }
-        const data1 = await res.json();
-            console.log(data1.message);
+            const URL = `/admin/add-spell`
+            const res = await FetchPostForm(URL , data )
             navigate(`/control-panel`);
         } catch (err) {
             console.log(err);
@@ -83,7 +66,7 @@ export const CreateSpell  = () => {
                     <input htmlFor="Damage" className="equipment-form" type="number" name="damage" onChange={handleChange} value={form.damage} />
                     <label>Type
                     <select htmlFor="Type" className="equipment-form" name="type" onChange={handleChange} value={form.type}>
-                        <option value="none" selected>Select an Option</option>
+                        <option value="none">Select an Option</option>
                         <option value="Incantation">Incantation</option>
                         <option value="Sorcery">Sorcery</option>
                     </select>

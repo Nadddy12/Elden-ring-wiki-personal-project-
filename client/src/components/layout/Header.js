@@ -12,7 +12,7 @@ export const Header = () => {
             <h1 className="main-title">ELDEN RING WIKI</h1>
             { user.role === "user" ? (
                 <div className="userInterface">
-                    <p>Welcome back <span className="username-header">{user.username.toUpperCase()}</span> Tarnished</p>
+                    <p>Welcome back Tarnished <span className="username-header">{user.username.toUpperCase()}</span></p>
                     <div className="menu">
                         <BsList />
                         <div className="menu-dropdown">
@@ -22,7 +22,7 @@ export const Header = () => {
                 </div>
             ) : user.role === "mod" ? (
                 <div className="userInterface">
-                    <p>Welcome back <span className="username-header">{user.username.toUpperCase()}</span> Tarnished</p>
+                    <p>Welcome back Tarnished <span className="username-header">{user.username.toUpperCase()}</span></p>
                     <div className="menu">
                         <BsList />
                         <div className="menu-dropdown">
@@ -33,7 +33,7 @@ export const Header = () => {
                 </div>
             ) : user.role === "admin" ? (
                 <div className="userInterface">
-                    <p>Welcome back <span className="username-header">{user.username.toUpperCase()}</span> Tarnished</p>
+                    <p>Welcome back Tarnished <span className="username-header">{user.username.toUpperCase()}</span></p>
                     <div className="menu">
                         <BsList />
                         <div className="menu-dropdown">

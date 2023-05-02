@@ -66,7 +66,7 @@ export const addEquipment = async (req, res) => {
   
     const form = formidable({ multiples: true });
     form.parse(req, async (err, fields, files) => {
-      console.log(fields , files)
+      
         if (err) {
             return res.status(400).json({ message: "The information provided in your form not completed" });
         }

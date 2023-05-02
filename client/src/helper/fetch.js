@@ -97,14 +97,14 @@ export const FetchUpdate = async (URL , data) => {
 
 
 
-/*export const FetchPostForm = async (URL , data , token) => {
+export const FetchPostForm = async (URL , data ) => {
     
     try{
-        const res = await fetch(`http://abdulrahmanfakhri.ide.3wa.io:9602${URL}`, {
-            method:"post",
+        const res = await fetch(`${process.env.REACT_APP_API_URL}${URL}`, {
+            method:"POST",
             body:data,
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${getToken()}`
             }
         });
     if (!res.ok) {
@@ -116,4 +116,26 @@ export const FetchUpdate = async (URL , data) => {
     }catch(err) {
         throw new Error(err.message);
     }
-};*/
+};
+
+
+export const FetchUpdateForm = async (URL , data ) => {
+    
+    try{
+        const res = await fetch(`${process.env.REACT_APP_API_URL}${URL}`, {
+            method:"PUT",
+            body:data,
+            headers: {
+                'Authorization': `Bearer ${getToken()}`
+            }
+        });
+    if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message);
+    }
+    const dataPostForm = await res.json();
+        return dataPostForm;
+    }catch(err) {
+        throw new Error(err.message);
+    }
+};

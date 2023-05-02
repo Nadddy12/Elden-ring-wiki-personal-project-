@@ -1,12 +1,12 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
-export const fetchUser = createAsyncThunk(
-    'pages/Login.js',
-    async () => {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/login`);
-        return await response.json();
-    }
-);
+// export const fetchUser = createAsyncThunk(
+//     'pages/Login.js',
+//     async () => {
+//         const response = await fetch(`${process.env.REACT_APP_API_URL}/login`);
+//         return await response.json();
+//     }
+// );
 
 const initialState =  {
         id:"",
@@ -37,19 +37,19 @@ export const userSlice = createSlice({
             };
         }
     },
-    extraReducers: (builder) => {
-        builder.addCase(fetchUser.fulfilled, (state, action) => {
-            return {
-                ...state
-            };
-        });
-        builder.addCase(fetchUser.rejected, (state, action) => {
-            return {
-                ...state,
-                error: {message: "an error occured", status: 500}
-            };
-        });
-    },
+    // extraReducers: (builder) => {
+    //     builder.addCase(fetchUser.fulfilled, (state, action) => {
+    //         return {
+    //             ...state
+    //         };
+    //     });
+    //     builder.addCase(fetchUser.rejected, (state, action) => {
+    //         return {
+    //             ...state,
+    //             error: {message: "an error occured", status: 500}
+    //         };
+    //     });
+    // },
 });
 
 export const {addUser , removeUser} = userSlice.actions;

@@ -1,6 +1,6 @@
 import { Header } from "../../components/layout/Header.js";
 import { Footer } from "../../components/layout/Footer.js";
-import { EditBlog } from "../../components/editblog/EditBlog.js";
+import { EditBlog } from "../../components/blog/EditBlog.js";
 import { CreateComment } from "../../components/comment/CreateComment.js";
 import { EditComment } from "../../components/comment/EditComment.js";
 import { DeleteComment } from "../../components/comment/DeleteComment.js";
@@ -137,10 +137,10 @@ export const OneBlog = () =>{
     
     const btnEditComment = (ele , i) => {
         return (ele.user && user.username === ele.user.username) ? (
-                    <button className="btn-edit-comment" onClick={() => openEditCommentModal(i)}>
-                    Edit
-                    </button>
-                ): null;
+            <button className="btn-edit-comment" onClick={() => openEditCommentModal(i)}>
+            Edit
+            </button>
+        ): null;
     }
     
     // comment 
@@ -149,7 +149,7 @@ export const OneBlog = () =>{
         ) : (
         <div className="comments" >
             {isCreateComment && <CreateComment closeCreateCommentModal={closeCreateCommentModal} 
-            onCommentCreate={(newComment) => setComments([...comments , newComment])}/>}
+                onCommentCreate={(newComment) => setComments([...comments , newComment])}/>}
             {comments.map((ele, i) => (
             <div className="comments-list" key={i}>
                 {ele.user ? (
@@ -160,10 +160,10 @@ export const OneBlog = () =>{
                 <div className="comment-control">
                     {btnEditComment(ele , i)}
                     {<DeleteComment comment={ele} commentId={ele._id} 
-                    onCommentDelete={(comment)=>setComments(comments.filter((c) => c._id !== comment._id))}/>}
+                        onCommentDelete={(comment)=>setComments(comments.filter((c) => c._id !== comment._id))}/>}
                 </div>
                 {(isEditingComment && editCommentIndex === i) && <EditComment comment={ele} commentId={ele._id}
-                closeEditCommentModal={closeEditCommentModal} onCommentUpdate={updateComment} />}
+                    closeEditCommentModal={closeEditCommentModal} onCommentUpdate={updateComment} />}
                 <p className="comments-list-content">{ele.content}</p>
             </div>
             ))}

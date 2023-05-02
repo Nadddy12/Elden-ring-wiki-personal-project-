@@ -28,7 +28,7 @@ export const CreateComment = ({closeCreateCommentModal , onCommentCreate}) => {
         try{
             const data = { content , userId: user.id };
             const URL = `/user/article/${id}/create-commentaire`;
-            const res = await FetchPost(URL, data);
+            const res = await FetchPost(URL, data );
             if (res) {
                 const newComment = { _id:res.commentaire._id , content:res.commentaire.content , user: { username: user.username } };
                 onCommentCreate(newComment);
