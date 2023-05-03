@@ -49,6 +49,10 @@ export const charactersSchema = mongoose.Schema({
         ref: 'User',
         required: true,
     },
+    name: {
+        type: String,
+        default: "Build",
+    },
     level: {
         type: Number,
         required: true,

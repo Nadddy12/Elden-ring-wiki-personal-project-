@@ -79,7 +79,7 @@ export const Spell = () => {
     
     
 const content = error ? (
-    <div className="errorMessage error" style={{ color: "red" }}>{error}</div>
+        <div className="errorMessage error" style={{ color: "red" }}>{error}</div>
     ) : (
     <main>
         <section>

@@ -1,6 +1,9 @@
 import {Header} from "../../components/layout/Header.js";
 import { Footer } from "../../components/layout/Footer.js";
+import { Link } from "react-router-dom";
 import "./home.scss";
+
+import character_bw from "../../assets/photo/character_bw.png";
 
 export const Home = () => {
     
@@ -36,6 +39,15 @@ export const Home = () => {
                         <div>
                             <h3>Multiplayer</h3>
                             <article>Elden Ring will feature both single-player and multiplayer modes, with up to four players being able to team up to explore the game's world and tackle bosses together. The game's multiplayer mode is expected to offer a unique and rewarding experience for players. In conclusion, while there is still no official release date for Elden Ring, fans can expect a challenging and immersive action role-playing game with a unique story, open-world design, and multiplayer mode. Keep an eye out for any new information on this highly anticipated game..</article>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Tools</h2>
+                    <div className="container">
+                        <div className="animation-wrapper">
+                            <Link to={"/builder"}><div className="color-image"></div></Link>
+                            <img src={character_bw} alt="character"/>
                         </div>
                     </div>
                 </section>

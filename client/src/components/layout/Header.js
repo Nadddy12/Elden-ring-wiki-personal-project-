@@ -16,6 +16,7 @@ export const Header = () => {
                     <div className="menu">
                         <BsList />
                         <div className="menu-dropdown">
+                            <Link className="header-links" to={"/character"}>Character</Link>
                             <Link className="header-links" to={"/logout"}>Log out</Link>
                         </div>
                     </div>
@@ -27,6 +28,7 @@ export const Header = () => {
                         <BsList />
                         <div className="menu-dropdown">
                             <Link className="header-links" to={"/control-panel"}>Administrator</Link>
+                            <Link className="header-links" to={"/character"}>Character</Link>
                             <Link className="header-links" to={"/logout"}>Log out</Link>
                         </div>
                     </div>
@@ -38,6 +40,7 @@ export const Header = () => {
                         <BsList />
                         <div className="menu-dropdown">
                             <Link className="header-links" to={"/control-panel"}>Adminisitorater</Link>
+                            <Link className="header-links" to={"/character"}>Character</Link>
                             <Link className="header-links" to={"/logout"}>Log out</Link>
                         </div>
                     </div>

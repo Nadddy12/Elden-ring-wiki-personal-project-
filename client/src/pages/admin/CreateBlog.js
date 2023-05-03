@@ -36,7 +36,6 @@ export const CreateBlog = () => {
             const data = { title, content, type, userId: user.id };
             const URL = user.role === "admin" ? "/admin/create-article" : "/mod/create-article";
             const res = await FetchPost(URL, data);
-            console.log(res);
             navigate(`/control-panel`);
         } catch (err) {
             console.log(err);

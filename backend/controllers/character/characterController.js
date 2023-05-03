@@ -1,31 +1,57 @@
 import {Character , AttributeModel} from "../../models/characters/charactersSchema.js";
 import {User} from "../../models/users/usersSchema.js";
+import {Equipment} from "../../models/equipments/equipmentsSchema.js";
+import {Spell} from "../../models/spells/spellsSchema.js";
+import mongoose from "mongoose";
+import {ObjectId} from "mongodb";
 
 export const saveCharacter = async (req , res) => {
     const userId = req.userId;
-    const { level , equipment , spell} = req.body;
+    const { name , level , equipment , spell} = req.body;
     const { vigor , mind , endurance , strength , dexterity , intelligence , faith , arcane} = req.body;
     
-    const attributeModel = new AttributeModel({
-        vigor,
-        mind,
-        endurance,
-        strength,
-        dexterity,
-        intelligence,
-        faith,
-        arcane
-    });
-    const newAttributes = attributeModel;
+    if(!userId || !mongoose.Types.ObjectId.isValid(userId)){
+            return res.status(401).json({message:"Invalid user ID"});
+    }
     
-    const character = new Character({
-        user:userId,
-        level,
-        attributes:newAttributes,
-        equipment,
-        spell
-    });
     try{
+        const user = await User.findById(userId);
+        if(!user){
+            return res.status(401).json({message:"Invalid User ID"});
+        }
+        const equipmentId = await Equipment.findById(equipment);
+        if(!equipmentId){
+            return res.status(401).json({message:"Invalid Equipment ID"});
+        }
+        const spellId = await Spell.findById(spell);
+        if(!spellId){
+            return res.status(401).json({message:"Invalid Spell ID"});
+        }
+        const characterCount = await Character.countDocuments({user: userId});
+        if(characterCount >= 5) {
+            return res.status(400).json({ message: "You cannot create more than 5 characters"});
+        }
+        
+        const attributeModel = new AttributeModel({
+            vigor,
+            mind,
+            endurance,
+            strength,
+            dexterity,
+            intelligence,
+            faith,
+            arcane
+        });
+        const newAttributes = attributeModel;
+        
+        const character = new Character({
+            user:userId,
+            name,
+            level,
+            attributes:newAttributes,
+            equipment:equipmentId,
+            spell:spellId
+        });
         await character.save();
         res.status(201).json({message:"Character was created" , character});
     }
@@ -40,11 +66,13 @@ export const getCharactersByUser = async (req , res) => {
     
     try{
         if(!userId){
-            res.status(401).json({message:"No user ID provided"});
+            return res.status(401).json({message:"No user ID provided"});
         }
-        const characters = await Character.find({user:userId});
-        if(!characters){
-            res.status(401).json({message:"No saved characters"});
+        const characters = await Character.find({user:userId})
+        .populate("equipment")
+        .populate("spell");
+        if(characters.length === 0){
+            return res.status(201).json({message:"No saved characters"});
         }
         res.status(201).json(characters);
     }

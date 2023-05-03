@@ -7,6 +7,8 @@ import { Equipment } from "../pages/equipment/Equipment.js";
 import { OneEquipment } from "../pages/equipment/OneEquipment.js";
 import { Spell } from "../pages/spell/Spell.js";
 import { OneSpell } from "../pages/spell/OneSpell.js";
+import { Characters } from "../pages/character/Character.js";
+import { Builder } from "../pages/builder/Builder.js";
 import {ControlPanel} from "../pages/panel/controlPanel.js";
 
 import { CreateBlog } from "../pages/admin/CreateBlog.js";
@@ -32,10 +34,13 @@ export const PublicRoutes = [
     { path:"/spell" , element: <Spell/>},
     { path:"/spell/:id" , element: <OneSpell/>},
     { path:"/article/:id" , element: <OneBlog/>},
+    { path:"/builder" , element: <Builder/>},
+    
 ];
 
 export const UserRoutes = [
     { path:"/dashboard" , element: <Dashboard/> },
+    { path:"/character" , element: <Characters/>},
     
 ];
 
