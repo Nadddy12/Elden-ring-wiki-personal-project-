@@ -45,6 +45,7 @@ export const Home = () => {
                 <section>
                     <h2>Tools</h2>
                     <div className="container">
+                    <article>Try Our Powerful builder and create your own unique style of play ! <span>Hover over the photo and click on it to access to the Tool.</span></article>
                         <div className="animation-wrapper">
                             <Link to={"/builder"}><div className="color-image"></div></Link>
                             <img src={character_bw} alt="character"/>

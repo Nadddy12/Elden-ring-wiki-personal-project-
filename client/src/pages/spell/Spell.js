@@ -1,7 +1,7 @@
 import { Header } from "../../components/layout/Header.js";
 import { Footer } from "../../components/layout/Footer.js";
-import { EditSpell } from "../../components/equipmentandspell/EditSpell.js";
-import { DeleteSpell } from "../../components/equipmentandspell/DeleteSpell.js";
+import { EditSpell } from "../../components/edit_and_delet_popup/EditSpell.js";
+import { DeleteSpell } from "../../components/edit_and_delet_popup/DeleteSpell.js";
 import { FetchGet } from "../../helper/fetch.js";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

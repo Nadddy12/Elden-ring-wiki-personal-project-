@@ -1,4 +1,5 @@
 import express from "express";
+import { rateLimiter } from "../middleware/rateLimiter.js"
 import {signup , login , verifyToken} from "../controllers/auth/authController.js";
 import { getAllBlogArticle , getOneArticle , getAllGuideArticle } from "../controllers/article/articleController.js";
 import { getAllEquipment , getEquipmentByType , getOneEquipment } from "../controllers/equipment/equipmentController.js";
@@ -8,8 +9,8 @@ import { getCommentaireByArticle } from "../controllers/commentaire/commentaireC
 
 const router = express.Router();
 
-router.post('/signup', signup);
-router.post('/login', login);
+router.post('/signup', rateLimiter, signup);
+router.post('/login', rateLimiter , login);
 router.get('/verify-token', verifyToken);
 
 router.get('/article/:id', getOneArticle);

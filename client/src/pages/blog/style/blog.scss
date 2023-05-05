@@ -1,19 +1,26 @@
 @import "../../../assets/colors/colors.scss";
+@import "../../../assets/mixin/mixin.scss";
 
 .blogs {
     margin-bottom: 40px;
+    padding: 15px;
 }
 
 .blogs-name {
     font-size: 24px;
     padding: 10px 0;
-    word-wrap: break-word
+    word-wrap: break-word;
+}
+
+.blogs-publisher {
+    padding: 0 20px;
+    word-wrap: break-word;
 }
 
 .blogs-bref-view {
     color: $font-2;
-    padding: 0 10px;
-    word-wrap: break-word
+    padding: 0 30px;
+    word-wrap: break-word;
 }
 
 .line-cutter {
@@ -23,4 +30,12 @@
     background-image: linear-gradient(to right, transparent, rgba(203, 156, 15, 0.6) 20%, rgba(203, 156, 15, 1) 50%, rgba(203, 156, 15, 0.6) 80%, transparent);
     background-size: 100% 100%;
     background-position: center;
+    
+    @include tablette {
+        width: 80%;
+    }
+    
+    @include desktop {
+        width: 90%;
+    }
 }

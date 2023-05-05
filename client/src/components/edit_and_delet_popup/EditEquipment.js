@@ -80,8 +80,8 @@ export const EditEquipment = ({data , dataId , onEquipmentUpdate , closeEditEqui
     return (
         <div className="modal-wrapper">
             <div className="edit-equipment">
-                <form>
-                    <fieldset>
+                <form className="form-edit">
+                    <fieldset className="fieldset-edit">
                         <legend>Edit Equipment</legend>
                         {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
                         <label>Name</label>

@@ -3,6 +3,7 @@ import { Footer } from "../../components/layout/Footer.js";
 import { FetchGet } from "../../helper/fetch.js";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./style/onespell.scss";
 
 
 export const OneSpell = () =>{
@@ -28,17 +29,21 @@ export const OneSpell = () =>{
     <div className="errorMessage error" style={{ color: "red" }}>{error}</div>
     ) : (
     <main>
-        <div className="spellContainer">
-            <h2 className="spell-name">{spell.name}</h2>
-            <p className="spell-type"> Type : {spell.type}</p>
-            <p className="spell-damage"> Damage : {spell.damage}</p>
-            <div className="spell-damagetype"> Damage Type : {spell.damagetype}</div>
-        </div>
-        {spell.image &&
-        <div className="spell-image">
-            <img src={`http://abdulrahmanfakhri.ide.3wa.io:9602/${spell.image}`} alt={spell.name}/>
-        </div>
-        }
+        <section>
+            <div className="wrapper-detail">
+                <div className="spell-container">
+                    <h2 className="spell-name">{spell.name}</h2>
+                    <p className="spell-type"> Type : {spell.type}</p>
+                    <p className="spell-damage"> Damage : {spell.damage}</p>
+                    <p className="spell-damagetype"> Damage Type : {spell.damagetype}</p>
+                </div>
+                {spell.image &&
+                <div className="spell-image">
+                    <img src={`${process.env.REACT_APP_API_URL}/${spell.image}`} alt={spell.name}/>
+                </div>
+                }
+            </div>
+        </section>
     </main>
     );
     

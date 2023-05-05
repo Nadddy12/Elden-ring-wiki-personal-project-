@@ -72,8 +72,8 @@ export const EditSpell = ({data , dataId , onSpellUpdate , closeEditSpellModal})
     return (
         <div className="modal-wrapper">
             <div className="edit-spell">
-                <form>
-                    <fieldset>
+                <form className="form-edit">
+                    <fieldset className="fieldset-edit">
                         <legend>Edit Spell</legend>
                         {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
                         <label>Name</label>

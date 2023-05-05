@@ -1,16 +1,20 @@
 import { Header } from "../../components/layout/Header.js";
 import { Footer } from "../../components/layout/Footer.js";
-import { FetchPostForm , FetchGet } from "../../helper/fetch.js";
+import { FetchPost , FetchGet } from "../../helper/fetch.js";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import React from "react";
+import "./style/builder.scss";
 
 export const Builder = () => {
     
     const {user} = useSelector(state => state);
+    const navigate = useNavigate();
     
+    //input state
     const [name , setName] = useState("");
-    const [level , setLevel] = useState(10);
+    const [level , setLevel] = useState(1);
     const [attribute , setAttribute] = useState({
         vigor:10,
         mind:10,
@@ -23,9 +27,20 @@ export const Builder = () => {
     });
     const [equipment , setEquipment] = useState("");
     const [spell , setSpell] = useState("");
-    const [error , setError] = useState(null);
     const [dataSpell , setDataSpell] = useState([]);
     const [dataEquipment , setDataEquipment] = useState([]);
+    
+    //output state
+    const [health , setHealth] = useState(425);
+    const [stamina , setStamina] = useState(70);
+    const [focus , setFocus] = useState(60);
+    const [damageEquipment , setDamageEquipment] = useState(0);
+    const [damageSpell , setDamageSpell] = useState(0);
+    
+    //handle errors
+    const [error , setError] = useState(null);
+    const [errorSubmit , setErrorSubmit] = useState(null);
+    
     
     //calling spell to loop it as value
     useEffect(() => {
@@ -55,9 +70,24 @@ export const Builder = () => {
         fetchDataEquipment();
     }, []);
     
+    //handle the changes in form and the output
     const handleChange = (e) => {
         const {name , value} = e.target;
-        setAttribute({...attribute , [name]: value});
+        const allowedValue = Math.min(value, 99)
+        
+        const oldValue = attribute[name];
+        const attributeDiff = allowedValue - oldValue;
+        
+        setAttribute({...attribute , [name]: allowedValue});
+        setLevel((prevLevel) => prevLevel + attributeDiff * 1)
+        
+        if(name === "vigor") {
+            setHealth((prevHealth) => prevHealth + attributeDiff * 30 )
+        } else if (name === "endurance") {
+            setStamina((prevStamina) => prevStamina + attributeDiff * 2)
+        } else if (name === "mind") {
+            setFocus((prevFocus) => prevFocus + attributeDiff * 3)
+        }
     };
     
     const handleNameInput = (e) => {
@@ -76,33 +106,67 @@ export const Builder = () => {
         setSpell(e.target.value);
     };
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrorSubmit(null);
         try{
-            const data = (name , level , {attribute} , equipment , spell);
+            const data = {
+                name, 
+                level ,
+                ...attribute,
+                equipment,
+                spell
+            };
             const URL = `/user/character`;
-            const res = FetchPostForm(URL , data);
-            console.log(res);
+            await FetchPost(URL , data);
+            setTimeout(()=> {
+                navigate("/character")
+            },2000);
         }catch(err) {
-            setError(err.message);
+            setErrorSubmit(err.message);
         }
     };
     
-    const content = error ? (
-        <div className="errorMessage error" style={{ color: "red" }}>{error}</div>
-    ) : (
+    //output calculation 
+    useEffect(() => {
+        const selectedEquipment = dataEquipment.find((e) => e._id === equipment);
+        const selectedSpell = dataSpell.find((e) => e._id === spell);
+        
+        const equipmentDamage = selectedEquipment ? selectedEquipment.damage : 0;
+        const spellDamage = selectedSpell ? selectedSpell.damage : 0;
+        
+        const eDamage = equipmentDamage * (1 + Math.log(attribute.strength - 9) * 0.4 + Math.log(attribute.dexterity - 9) * 0.2)
+        let sDamage;
+        if(selectedSpell && selectedSpell.type === "Incantation") {
+            sDamage = spellDamage * (1 + Math.log(attribute.intelligence - 9) * 0.07 + Math.log(attribute.faith - 9) * 0.9 + Math.log(attribute.arcane - 9) * 0.02)
+        } else {
+            sDamage = spellDamage * (1 + Math.log(attribute.intelligence - 9) * 0.9 + Math.log(attribute.faith - 9) * 0.07 + Math.log(attribute.arcane - 9) * 0.02)
+        }
+        
+        setDamageEquipment(eDamage);
+        setDamageSpell(sDamage);
+    },[attribute , equipment , spell , dataEquipment , dataSpell]);
+    
+    //render part
+    const content = 
+    (
         <main>
             <section>
-            <h2>Use our powerful tools to simulate you build</h2>
+            <h2>Use our powerful tools to simulate your build</h2>
                 <div className="builder-wrapper">
                     <form>
                         <fieldset>
                             <legend>Create Your Character</legend>
                             <input type="text" name="name" placeholder="Enter build name" onChange={handleNameInput} value={name} />
-                            <input type="number" name="level" placeholder={level} onChange={handleLevelInput} value={level}/>
+                            <label>Level</label>
+                            <input type="number" name="level" placeholder={level} onChange={handleLevelInput} value={level} disabled/>
                             {Object.entries(attribute).map(([name , value], i) => (
-                                <input type="number" key={i} className="attribute" name={name} placeholder={value} onChange={handleChange} value={value}/>
+                                <React.Fragment key={i}>
+                                    <label>{name.charAt(0).toUpperCase() + name.slice(1)}</label>
+                                    <input type="number" className="attribute" name={name} placeholder={value} onChange={handleChange} value={value} min="10" max="99" step="1"/>
+                                </React.Fragment>
                             ))}
+                            {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
                             <select name="spell" value={spell} onChange={handleSpellInput}>
                                 <option value="">Select a spell</option>
                                 {dataSpell.map((spell , i) => (
@@ -115,9 +179,22 @@ export const Builder = () => {
                                     <option key={i} value={equipment._id}>{equipment.name}</option>
                                 ))}
                             </select>
-                            <button onClick={handleSubmit}>Save</button>
+                            {errorSubmit && <div className="errorMessage error" style={{ color: "red" }}>{errorSubmit}</div> }
+                            {user.role && <button onClick={handleSubmit}>Save</button>}
                         </fieldset>
                     </form>
+                </div>
+                <div className="output">
+                    <label>Health : </label>
+                    <input type="number" name="health" value={health} disabled />
+                    <label>Stamina : </label>
+                    <input type="number" name="stamina" value={stamina} disabled />
+                    <label>Focus : </label>
+                    <input type="number" name="focus" value={focus} disabled />
+                    <label>Spell Damage : </label>
+                    <input type="number" name="spellDamage" value={Math.round(damageSpell)} disabled />
+                    <label>Weapon Damage : </label>
+                    <input type="number" name="equipmentDamage" value={Math.round(damageEquipment)} disabled />
                 </div>
             </section>
         </main>
@@ -131,27 +208,3 @@ export const Builder = () => {
         </>
     );
 };
-
-
-
-            /*const dataAtt = new FormData();
-            
-                dataAtt.append("vigor", form.vigor);
-                dataAtt.append("mind", form.mind);
-                dataAtt.append("endurance", form.endurance);
-                dataAtt.append("strength", form.strength);
-                dataAtt.append("dexterity", form.dexterity);
-                dataAtt.append("intelligence", form.intelligence);
-                dataAtt.append("faith", form.faith);
-                dataAtt.append("arcane", form.arcane);
-                */
-                
-                
-                /*<input type="number" className="attribute" name="vigor" placeholder={attribute.vigor} onChange={handleChange} value={attribute.vigor}/>
-                            <input type="number" className="attribute" name="mind" placeholder={attribute.mind} onChange={handleChange} value={attribute.mind}/>
-                            <input type="number" className="attribute" name="endurance" placeholder={attribute.endurance} onChange={handleChange} value={attribute.endurance}/>
-                            <input type="number" className="attribute" name="strength" placeholder={attribute.strength} onChange={handleChange} value={attribute.strength}/>
-                            <input type="number" className="attribute" name="dexterity" placeholder={attribute.dexterity} onChange={handleChange} value={attribute.dexterity}/>
-                            <input type="number" className="attribute" name="intelligence" placeholder={attribute.intelligence} onChange={handleChange} value={attribute.intelligence}/>
-                            <input type="number" className="attribute" name="faith" placeholder={attribute.faith} onChange={handleChange} value={attribute.faith}/>
-                            <input type="number" className="attribute" name="arcane" placeholder={attribute.arcane} onChange={handleChange} value={attribute.arcane}/>*/

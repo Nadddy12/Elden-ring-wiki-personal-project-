@@ -12,7 +12,7 @@ export const Header = () => {
             <h1 className="main-title">ELDEN RING WIKI</h1>
             { user.role === "user" ? (
                 <div className="userInterface">
-                    <p>Welcome back Tarnished <span className="username-header">{user.username.toUpperCase()}</span></p>
+                    <p>Welcome back Tarnished <span className="username-header">{user.username}</span></p>
                     <div className="menu">
                         <BsList />
                         <div className="menu-dropdown">
@@ -23,11 +23,11 @@ export const Header = () => {
                 </div>
             ) : user.role === "mod" ? (
                 <div className="userInterface">
-                    <p>Welcome back Tarnished <span className="username-header">{user.username.toUpperCase()}</span></p>
+                    <p>Welcome back Tarnished <span className="username-header">{user.username}</span></p>
                     <div className="menu">
                         <BsList />
                         <div className="menu-dropdown">
-                            <Link className="header-links" to={"/control-panel"}>Administrator</Link>
+                            <Link className="header-links" to={"/control-panel"}>Admin</Link>
                             <Link className="header-links" to={"/character"}>Character</Link>
                             <Link className="header-links" to={"/logout"}>Log out</Link>
                         </div>
@@ -35,11 +35,11 @@ export const Header = () => {
                 </div>
             ) : user.role === "admin" ? (
                 <div className="userInterface">
-                    <p>Welcome back Tarnished <span className="username-header">{user.username.toUpperCase()}</span></p>
+                    <p>Welcome back Tarnished <span className="username-header">{user.username}</span></p>
                     <div className="menu">
                         <BsList />
                         <div className="menu-dropdown">
-                            <Link className="header-links" to={"/control-panel"}>Adminisitorater</Link>
+                            <Link className="header-links" to={"/control-panel"}>Admin</Link>
                             <Link className="header-links" to={"/character"}>Character</Link>
                             <Link className="header-links" to={"/logout"}>Log out</Link>
                         </div>

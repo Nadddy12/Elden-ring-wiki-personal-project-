@@ -34,7 +34,8 @@ export const Characters = () => {
         ) : message ? (
                 <main>
                     <section>
-                        <div style={{ color: "#e0ddce" , width : "100%", height: "15vh" , fontSize: "28px" , textAlign: "center"}}>{message}</div>
+                        <div style={{ color: "#e0ddce" , width : "100%" , fontSize: "28px" , textAlign: "center"}}>{message}</div>
+                        <div><Link className="link-builder" to={"/builder"} >Use our Builder to build another character</Link></div>
                     </section>
                 </main>
             ) : (

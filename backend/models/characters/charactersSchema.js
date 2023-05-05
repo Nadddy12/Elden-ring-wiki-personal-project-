@@ -1,48 +1,5 @@
 import mongoose from "mongoose";
 
-export const attributesSchema = mongoose.Schema({
-    vigor: {
-        type:Number,
-        default:6,
-        required:true
-    },
-    mind: {
-        type:Number,
-        default:6,
-        required:true
-    },
-    endurance: {
-        type:Number,
-        default:6,
-        required:true
-    },
-    strength: {
-        type:Number,
-        default:6,
-        required:true
-    },
-    dexterity: {
-        type:Number,
-        default:6,
-        required:true
-    },
-    intelligence: {
-        type:Number,
-        default:6,
-        required:true
-    },
-    faith: {
-        type:Number,
-        default:6,
-        required:true
-    },
-    arcane: {
-        type:Number,
-        default:6,
-        required:true
-    }
-});
-
 export const charactersSchema = mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -58,8 +15,62 @@ export const charactersSchema = mongoose.Schema({
         required: true,
     },
     attributes: {
-        type: Object,
-        required:true
+        vigor: {
+            type:Number,
+            default:10,
+            min:10,
+            max:99,
+            required:true
+        },
+        mind: {
+            type:Number,
+            default:10,
+            min:10,
+            max:99,
+            required:true
+        },
+        endurance: {
+            type:Number,
+            default:10,
+            min:10,
+            max:99,
+            required:true
+        },
+        strength: {
+            type:Number,
+            default:10,
+            min:10,
+            max:99,
+            required:true
+        },
+        dexterity: {
+            type:Number,
+            default:10,
+            min:10,
+            max:99,
+            required:true
+        },
+        intelligence: {
+            type:Number,
+            default:10,
+            min:10,
+            max:99,
+            required:true
+        },
+        faith: {
+            type:Number,
+            default:10,
+            min:10,
+            max:99,
+            required:true
+        },
+        arcane: {
+            type:Number,
+            default:10,
+            min:10,
+            max:99,
+            required:true
+        }
     },
     equipment: {
         type: mongoose.Schema.Types.ObjectId,
@@ -75,4 +86,3 @@ export const charactersSchema = mongoose.Schema({
     versionKey: false});
     
 export const Character = mongoose.model("Character", charactersSchema);
-export const AttributeModel = mongoose.model("AttributeModel", attributesSchema);

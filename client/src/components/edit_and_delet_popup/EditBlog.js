@@ -2,7 +2,7 @@ import { useState , useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { FetchUpdate } from "../../helper/fetch.js";
-import "./style/editBlog.scss";
+import "./style/editStyle.scss";
 
 export const EditBlog = ({ blog , closeEditModal , onBlogUpdate}) => {
     
@@ -50,8 +50,8 @@ export const EditBlog = ({ blog , closeEditModal , onBlogUpdate}) => {
     return (
         <div className="modal-wrapper">
             <div className="edit-blog">
-                <form>
-                    <fieldset>
+                <form className="form-edit">
+                    <fieldset className="fieldset-edit">
                         <legend>Edit Blog</legend>
                         {error && <div className="errorMessage error" style={{ color: "red" }}>{error}</div>}
                         <label>Title</label>

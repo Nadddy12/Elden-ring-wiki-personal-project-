@@ -1,4 +1,4 @@
-import {Character , AttributeModel} from "../../models/characters/charactersSchema.js";
+import { Character } from "../../models/characters/charactersSchema.js";
 import {User} from "../../models/users/usersSchema.js";
 import {Equipment} from "../../models/equipments/equipmentsSchema.js";
 import {Spell} from "../../models/spells/spellsSchema.js";
@@ -10,6 +10,7 @@ export const saveCharacter = async (req , res) => {
     const { name , level , equipment , spell} = req.body;
     const { vigor , mind , endurance , strength , dexterity , intelligence , faith , arcane} = req.body;
     
+    
     if(!userId || !mongoose.Types.ObjectId.isValid(userId)){
             return res.status(401).json({message:"Invalid user ID"});
     }
@@ -19,36 +20,39 @@ export const saveCharacter = async (req , res) => {
         if(!user){
             return res.status(401).json({message:"Invalid User ID"});
         }
-        const equipmentId = await Equipment.findById(equipment);
-        if(!equipmentId){
-            return res.status(401).json({message:"Invalid Equipment ID"});
+        let equipmentId = null;
+        if(equipment) {
+            equipmentId = await Equipment.findById(equipment);
+            if(!equipmentId){
+                return res.status(401).json({message:"Invalid Equipment ID"});
+            }
         }
-        const spellId = await Spell.findById(spell);
-        if(!spellId){
-            return res.status(401).json({message:"Invalid Spell ID"});
+        let spellId = null;
+        if(spell) {
+            spellId = await Spell.findById(spell);
+            if(!spellId){
+                return res.status(401).json({message:"Invalid Spell ID"});
+            }
         }
         const characterCount = await Character.countDocuments({user: userId});
         if(characterCount >= 5) {
             return res.status(400).json({ message: "You cannot create more than 5 characters"});
         }
         
-        const attributeModel = new AttributeModel({
-            vigor,
-            mind,
-            endurance,
-            strength,
-            dexterity,
-            intelligence,
-            faith,
-            arcane
-        });
-        const newAttributes = attributeModel;
-        
         const character = new Character({
             user:userId,
             name,
             level,
-            attributes:newAttributes,
+            attributes:{
+                vigor,
+                mind,
+                endurance,
+                strength,
+                dexterity,
+                intelligence,
+                faith,
+                arcane
+            },
             equipment:equipmentId,
             spell:spellId
         });
@@ -56,7 +60,15 @@ export const saveCharacter = async (req , res) => {
         res.status(201).json({message:"Character was created" , character});
     }
     catch(err){
-        res.status(500).json({message: "internal server error"});
+        if (err.message.includes("equipment")) {
+            res.status(400).json({ message: 'Invalid equipment value. Please select equipment.' });
+        } else if (err.message.includes("spell")) {
+            res.status(400).json({ message: 'Invalid spell value. Please select spell.' });
+        }else if (err instanceof mongoose.Error.ValidationError) {
+            res.status(400).json({ message: 'Invalid attribute value. Please make sure values are between 10 and 99.' });
+        } else {
+            res.status(500).json({ message: 'An unexpected error occurred.' });
+        }
     }
 };
 
@@ -108,26 +120,3 @@ export const deleteCharacterByUser = async (req , res) =>{
     }
 
 };
-
-
-
-
-/*const newAttributes = [];
-    attributes.forEach((attribute) => {
-        
-           const attributeModel = {
-                name: attribute.name,
-                value:attribute.value
-            }
-        
-            newAttributes.push(attributeModel)
-    })   
-    
-    // touts les models dans : newAttributes
-    console.log(newAttributes)
-    
-    const charactere = new Character({
-        attributes: newAttributes
-    })
-    
-    console.log(charactere)*/

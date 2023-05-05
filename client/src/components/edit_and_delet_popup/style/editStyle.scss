@@ -10,24 +10,34 @@
     z-index: 999;
     background-color: $popup-background;
     
-    .edit-equipment , .edit-spell{
+    .edit-equipment , .edit-spell , .edit-blog , .edit-guide {
         position: fixed;
         top: 50%;
         left: 50%;
-        transform: translate(-50% , -50%);
+        display: flex;
+        overflow: auto;
         width: 80%;
-        background-color: $color1-background;
+        height: 95vh;
         padding: 15px;
+        align-items: center;
+        transform: translate(-50% , -50%);
+        background-color: $color1-background;
         border-radius: 7px;
     }
+    .form-edit {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
     
-    fieldset {
+    .fieldset-edit {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
-        margin: 60px auto;
+        height: 100%;
         justify-content: space-around;
         align-items: center;
+        margin: 10px 0;
         box-sizing: border-box;
         border: 15px solid #000;
         border-left: none;
@@ -37,12 +47,13 @@
         
         legend {
             font-size: 22px;
+            font-weight: bold;
         }
         
         label {
             width: 100%;
             text-align: left;
-            padding: 15px;
+            padding: 10px;
         }
         
         input {
@@ -78,7 +89,7 @@
         
         textarea {
             width: 100%;
-            height: 300px;
+            height: 250px;
             padding: 20px;
             background-color: $color2-background;
             border: 2px double $color1-background inset;
@@ -89,14 +100,14 @@
             width: 50%;
             text-align: left;
             padding: 20px;
-            margin: 20px;
+            margin: 0 20px;
             background-color: $color2-background;
             border: 2px double $color1-background inset;
             border-radius: 5px;
             cursor: pointer;
         }
         
-        .edit-equipment-btn , .edit-spell-btn{
+        .edit-equipment-btn , .edit-spell-btn , .edit-blog-btn , .edit-guide-btn{
             
             display: flex;
             justify-content: space-around;

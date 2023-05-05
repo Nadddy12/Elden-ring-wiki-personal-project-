@@ -2,7 +2,7 @@
 
 
 .blog-content {
-    padding: 0 10px;
+    padding: 10px 15px;
     
     .blog-title {
     padding: 10px 0;
@@ -15,10 +15,15 @@
     border: 2px solid $btn1;
     padding: 4px;
     cursor: pointer;
-    margin-left: 5px;
+    margin-left: 1%;
+    border-radius: 7px;
+    transition: all 0.5s ;
     
     &:hover {
         border-color: $btn2;
+        box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.6);
+        color: $btn1;
+        transition: all 0.5s ;
     }
 }
 
@@ -47,6 +52,7 @@
             display: flex;
             justify-content: right;
             margin: 0;
+            gap: 20px;
             width: 60%;
             
             .btn-delet-comment-blog , .btn-edit-comment {

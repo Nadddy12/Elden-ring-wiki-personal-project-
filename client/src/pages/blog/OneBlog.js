@@ -1,6 +1,6 @@
 import { Header } from "../../components/layout/Header.js";
 import { Footer } from "../../components/layout/Footer.js";
-import { EditBlog } from "../../components/blog/EditBlog.js";
+import { EditBlog } from "../../components/edit_and_delet_popup/EditBlog.js";
 import { CreateComment } from "../../components/comment/CreateComment.js";
 import { EditComment } from "../../components/comment/EditComment.js";
 import { DeleteComment } from "../../components/comment/DeleteComment.js";
@@ -112,7 +112,7 @@ export const OneBlog = () =>{
     
     //none user
     const noneUser = (!user.role) ? (
-        <p>If you wish to comment on the post <Link className="link-in-blog" to={"/signup"}>Sign up</Link> or <Link className="link-in-blog" to={"/login"}>Log in</Link></p>
+        <p>If you wish to be part of the community and comment on our blogs <Link className="link-in-blog" to={"/signup"}>Sign up</Link> or <Link className="link-in-blog" to={"/login"}>Log in</Link></p>
     ) : null;
     
     //btn for blog edit and delete

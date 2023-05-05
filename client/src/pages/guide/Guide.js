@@ -1,7 +1,7 @@
 import { Header } from "../../components/layout/Header.js";
 import { Footer } from "../../components/layout/Footer.js";
-import { EditGuide } from "../../components/guide/EditGuide.js";
-import { DeleteGuide } from "../../components/guide/DeleteGuide.js";
+import { EditGuide } from "../../components/edit_and_delet_popup/EditGuide.js";
+import { DeleteGuide } from "../../components/edit_and_delet_popup/DeleteGuide.js";
 import { FetchGet } from "../../helper/fetch.js";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -57,7 +57,7 @@ export const Guide = () => {
     const btnEditGuide = (ele , i) => {
         return (user.role === 'admin') ? (
             <button className="btn-edit-guide" onClick={() => openEditGuideModal(i)}>
-            Edit
+            Edit Guide
             </button>
         ): null;
     }
@@ -71,11 +71,11 @@ const content = error ? (
             {guides.map((ele, i) => (
                 <div key={i} className="guide-wrapper">
                     <div className="btn-wrapper">
+                    {<DeleteGuide guide={ele} guideId={ele._id} 
+                        onGuideDelete={(guide)=>setGuides(guides.filter((c) => c._id !== guide._id))}/>}
                     {btnEditGuide(ele , i)}
                     {(isEditingGuide && editGuideIndex === i) && <EditGuide guide={ele} guideId={ele._id}
                         closeEditGuideModal={closeEditGuideModal} onGuideUpdate={updateGuide}/>}
-                    {<DeleteGuide guide={ele} guideId={ele._id} 
-                        onGuideDelete={(guide)=>setGuides(guides.filter((c) => c._id !== guide._id))}/>}
                     </div>
                 
                     <h2 className="guide-title" key={i}>{ele.title}</h2>

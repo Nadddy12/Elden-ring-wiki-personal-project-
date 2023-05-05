@@ -1,4 +1,4 @@
-import { Routes , Route , useNavigate } from "react-router-dom";
+import { Routes , Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector , useDispatch } from "react-redux";
 import { PublicRoutes , UserRoutes , AdminRoutes , ModRoutes } from "./route/routes.js";
@@ -12,14 +12,13 @@ const App = () => {
   const {user} = useSelector(state => state);
   
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   
   useEffect(() => {
     
     const token = localStorage.getItem("jwt");
     
-    if(token){
-      fetch("http://abdulrahmanfakhri.ide.3wa.io:9602/verify-token", { 
+    if(token) {
+      fetch(`${process.env.REACT_APP_API_URL}/verify-token`, { 
         method:"GET",
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +32,6 @@ const App = () => {
         .catch(err=>{
           console.log(err);
           localStorage.removeItem('jwt')
-          navigate("/login");
         });
     }
     

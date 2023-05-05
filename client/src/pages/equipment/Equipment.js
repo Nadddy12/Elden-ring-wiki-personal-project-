@@ -1,7 +1,7 @@
 import { Header } from "../../components/layout/Header.js";
 import { Footer } from "../../components/layout/Footer.js";
-import { EditEquipment } from "../../components/equipmentandspell/EditEquipment.js";
-import { DeleteEquipment } from "../../components/equipmentandspell/DeleteEquipment.js";
+import { EditEquipment } from "../../components/edit_and_delet_popup/EditEquipment.js";
+import { DeleteEquipment } from "../../components/edit_and_delet_popup/DeleteEquipment.js";
 import { FetchGet } from "../../helper/fetch.js";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

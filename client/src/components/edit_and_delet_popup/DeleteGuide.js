@@ -19,7 +19,7 @@ export const DeleteGuide = ({guide , guideId , onGuideDelete}) => {
     
     const btnDeleteGuide = user.role === 'admin' ? (
         <button className="btn-delete-guide" onClick={() => deleteGuide()}>
-            Delete
+            Delete Guide
         </button>
     ) : null;
     

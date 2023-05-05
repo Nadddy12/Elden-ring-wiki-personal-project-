@@ -1,0 +1,73 @@
+@import "../../../assets/colors/colors.scss";
+
+.builder-wrapper {
+    width: 100%;
+    
+    form {
+        margin: 0 auto;
+        
+        fieldset {
+            width: 95%;
+            margin: 0 auto;
+            padding: 5px;
+            border-radius: 7px;
+            background-color: $comment-background;
+            text-align: center;
+            box-sizing: border-box;
+            
+            legend {
+                font-size: 22px;
+            }
+            
+            input {
+                width: 100%;
+                padding: 5px;
+                border-radius: 7px;
+                border: none;
+                background-color: $comment-background;
+                text-align: center;
+                box-sizing: border-box;
+            }
+            
+            select {
+                width: 48%;
+                padding: 5px;
+                margin: 1%;
+                border-radius: 7px;
+                border: none;
+                background-color: $comment-background;
+                text-align: center;
+                box-sizing: border-box;
+            }
+            
+            button {
+                border-radius: 7px;
+                padding: 5px;
+                margin: 1%;
+                border: none;
+                background-color: $comment-background;
+                text-align: center;
+            }
+        }
+    }
+}
+
+.output {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    
+    label {
+        width: 48%;
+        text-align: center;
+    }
+    input {
+        width: 48%;
+        border-radius: 7px;
+        text-align: center;
+        background-color: $comment-background;
+    }
+}
