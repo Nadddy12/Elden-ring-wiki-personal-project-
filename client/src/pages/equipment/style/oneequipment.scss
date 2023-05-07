@@ -4,6 +4,16 @@
 .wrapper-detail {
     display: flex;
     flex-wrap: wrap;
+    border: 1px solid #bfa42f;
+    border-radius: 7px;
+    box-shadow: 
+        inset 0 0 10px rgba(70, 95, 58, 0.5),
+        inset 0 0 20px rgba(70, 95, 58, 0.5),
+        inset 0 0 30px rgba(70, 95, 58, 0.5),
+         0 0 10px rgba(255, 255, 255, 0.3),
+         0 0 15px rgba(255, 255, 255, 0.3),
+         0 0 20px rgba(255, 255, 255, 0.3),
+    ;
     
     @include desktop {
         flex-wrap: nowrap;

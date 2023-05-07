@@ -14,6 +14,12 @@ export const usersSchema = mongoose.Schema({
         type: String,
         required: true,
         unique: true,
+        validate: {
+            validator: function(v) {
+            return /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(v);
+        },
+        message: 'Please enter a valid Email',
+        },
     },
     password: {
         type: String,

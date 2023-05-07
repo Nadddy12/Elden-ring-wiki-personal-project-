@@ -1,4 +1,5 @@
 @import "../../../assets/colors/colors.scss";
+@import "../../../assets/mixin/mixin.scss";
 
 .all-users {
     width: 80%;
@@ -9,14 +10,24 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        
+        
     }
     
     .users {
-        width: 45%;
+        width: 100%;
         text-align: center;
         box-sizing:border-box;
         padding: 5px;
         box-shadow: -6px -6px 42px 6px rgba(255,255,255,0.2) inset;
+        
+        @include tablette {
+            width: 45%;
+        }
+        
+        @include desktop {
+            width: 31%;
+        }
         
         p {
             padding: 5px;

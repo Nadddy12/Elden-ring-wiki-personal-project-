@@ -119,9 +119,7 @@ export const Builder = () => {
             };
             const URL = `/user/character`;
             await FetchPost(URL , data);
-            setTimeout(()=> {
                 navigate("/character")
-            },2000);
         }catch(err) {
             setErrorSubmit(err.message);
         }
@@ -157,7 +155,7 @@ export const Builder = () => {
                     <form>
                         <fieldset>
                             <legend>Create Your Character</legend>
-                            <input type="text" name="name" placeholder="Enter build name" onChange={handleNameInput} value={name} />
+                            <input className="name" type="text" name="name" placeholder="Enter build name" onChange={handleNameInput} value={name} />
                             <label>Level</label>
                             <input type="number" name="level" placeholder={level} onChange={handleLevelInput} value={level} disabled/>
                             {Object.entries(attribute).map(([name , value], i) => (

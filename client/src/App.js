@@ -17,7 +17,7 @@ const App = () => {
     
     const token = localStorage.getItem("jwt");
     
-    if(token) {
+    if(token && !user.isLogged) {
       fetch(`${process.env.REACT_APP_API_URL}/verify-token`, { 
         method:"GET",
         headers: {

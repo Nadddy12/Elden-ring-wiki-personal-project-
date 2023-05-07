@@ -1,5 +1,4 @@
 import { Home } from "../pages/home/Home.js";
-import { Dashboard } from "../pages/dashboard/Dashboard.js";
 import { Blog } from "../pages/blog/Blog.js";
 import { OneBlog } from "../pages/blog/OneBlog.js";
 import { Guide } from "../pages/guide/Guide.js";
@@ -39,7 +38,6 @@ export const PublicRoutes = [
 ];
 
 export const UserRoutes = [
-    { path:"/dashboard" , element: <Dashboard/> },
     { path:"/character" , element: <Characters/>},
     
 ];

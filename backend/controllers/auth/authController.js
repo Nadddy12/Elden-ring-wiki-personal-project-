@@ -44,6 +44,11 @@ export const signup = async (req , res) => {
         if (err.code === 11000) {
         return res.status(400).json({message:"Username or email already exists"});
         }
+        if(err.name === 'ValidationError') {
+            if(err.errors.email) {
+                return res.status(400).json({message: "Please enter a valid Email"});
+            }
+        }
         res.status(500).json({message: "Internal server error."});
     }
 };

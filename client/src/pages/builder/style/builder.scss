@@ -1,27 +1,47 @@
 @import "../../../assets/colors/colors.scss";
+@import "../../../assets/mixin/mixin.scss";
 
 .builder-wrapper {
-    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    
+    @include tablette {
+        max-width: 800px;
+        margin: 0 auto;
+    }
     
     form {
         margin: 0 auto;
         
+        
         fieldset {
-            width: 95%;
-            margin: 0 auto;
-            padding: 5px;
-            border-radius: 7px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
             background-color: $comment-background;
             text-align: center;
             box-sizing: border-box;
+            
+            .name {
+                width: 100%;
+            }
             
             legend {
                 font-size: 22px;
             }
             
+            label {
+                width: 50%;
+                margin-top: 5px;
+            }
+            
             input {
-                width: 100%;
+                width: 50%;
                 padding: 5px;
+                margin-top: 5px;
                 border-radius: 7px;
                 border: none;
                 background-color: $comment-background;
@@ -42,11 +62,17 @@
             
             button {
                 border-radius: 7px;
-                padding: 5px;
+                padding: 5px 15px;
                 margin: 1%;
                 border: none;
                 background-color: $comment-background;
                 text-align: center;
+                transition: background-color 0.2s ease-in-out;
+                cursor: pointer;
+                
+                &:hover {
+                    background-color: rgba(99, 97, 92, 0.8);
+                }
             }
         }
     }
@@ -55,10 +81,15 @@
 .output {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
+    max-width: 100%;
     padding: 10px;
     margin: 10px 0;
     box-sizing: border-box;
+    
+    @include tablette {
+        max-width: 800px;
+        margin: 0 auto;
+    }
     
     label {
         width: 48%;

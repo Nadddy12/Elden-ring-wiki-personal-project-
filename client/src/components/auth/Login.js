@@ -34,7 +34,7 @@ export const Login = () => {
             const data = await res.json();
             dispatch(addUser(data));
             localStorage.setItem("jwt", data.jwt);
-            navigate("/dashboard");
+            navigate("/");
         }catch(err){
             console.log(err);
         }

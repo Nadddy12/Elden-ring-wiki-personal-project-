@@ -2,7 +2,7 @@ import rateLimit from "express-rate-limit";
 
 export const rateLimiter = rateLimit({
     windowMs: 2 * 60 * 1000,
-    max: 5,
+    max: 10,
     handler: function (req , res ) {
         const currentTime = Date.now();
         const remainingTime = req.rateLimit.resetTime - currentTime;
