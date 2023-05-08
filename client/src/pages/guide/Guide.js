@@ -5,6 +5,7 @@ import { DeleteGuide } from "../../components/edit_and_delet_popup/DeleteGuide.j
 import { FetchGet } from "../../helper/fetch.js";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import "./style/guide.scss";
 
 export const Guide = () => {
@@ -100,6 +101,14 @@ const content = error ? (
 
     return (
         <>
+            <Helmet>
+                <title>Elden Ring wiki Fansite - Guides</title>
+                <meta 
+                    name="description" 
+                    content="Discover expert guides and walkthroughs for Elden Ring, the highly anticipated action role-playing game from FromSoftware and George R.R. Martin. Whether you're a veteran Soulsborne player or new to the genre, our comprehensive guides will help you navigate the world of Elden Ring, defeat its fearsome bosses, and uncover its secrets. Join our community of fellow Elden Ring fans and start building your ultimate guide today."
+                />
+                <meta name="keywords" content="blogs, elden, eldenring, elden ring, game, fromsoftware, multiplayer, community" />
+            </Helmet>
             <Header />
             {content}
             <Footer />

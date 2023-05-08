@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Header } from "../../components/layout/Header.js";
 import { Footer } from "../../components/layout/Footer.js";
+import { Helmet } from "react-helmet";
 import "./style/controlPanel.scss"
 
 export const ControlPanel = () => {
@@ -33,6 +34,9 @@ export const ControlPanel = () => {
             )
     return(
         <>
+            <Helmet>
+                <title>Control Panel</title>
+            </Helmet>
             <Header />
             {content}
             <Footer />

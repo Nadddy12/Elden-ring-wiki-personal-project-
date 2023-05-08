@@ -24,10 +24,8 @@ export const CreateGuide = () => {
         try {
             const data = { title, content, type, link , userId: user.id };
             const res = await FetchPost(URL, data, token);
-            console.log(res);
             navigate(`/control-panel`);
         } catch (err) {
-            console.log(err);
             setError(err.message);
         }
     };
@@ -50,14 +48,14 @@ export const CreateGuide = () => {
                     type="text" 
                     name="title"
                     placeholder="Wrtie the title"
-                    onChange={(e)=>setTitle(e.target.value)} 
+                    onChange={(e)=>setTitle(e.target.value.replace(/^\w/, (c) => c.toUpperCase()))} 
                     value={title} />
                     <label>Content</label>
                     <textarea 
                     forhtml="Content" 
                     name="content" 
                     placeholder="Write the content"
-                    onChange={(e)=>setContent(e.target.value)} 
+                    onChange={(e)=>setContent(e.target.value.replace(/^\w/, (c) => c.toUpperCase()))} 
                     value={content} >
                     </textarea>
                     <label>Link Youtube video (URL)</label>

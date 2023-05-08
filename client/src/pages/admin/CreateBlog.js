@@ -38,7 +38,6 @@ export const CreateBlog = () => {
             const res = await FetchPost(URL, data);
             navigate(`/control-panel`);
         } catch (err) {
-            console.log(err);
             setError(err.message);
         }
     };

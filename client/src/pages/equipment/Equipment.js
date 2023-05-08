@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AiFillEdit } from "react-icons/ai";
+import { Helmet } from "react-helmet";
 import "./style/equipment.scss";
 
 export const Equipment = () => {
@@ -115,6 +116,14 @@ const content = error ? (
 
     return (
         <>
+            <Helmet>
+                <title>Elden Ring wiki Fansite - equipments</title>
+                <meta 
+                    name="description" 
+                    content="Discover the most powerful and unique equipment and spells in Elden Ring. Optimize your playstyle and conquer tough enemies with our comprehensive guide. Join our community and start exploring the vast world of Elden Ring."
+                />
+                <meta name="keywords" content="blogs, elden, eldenring, elden ring, game, fromsoftware, multiplayer, community, weapons, spells, equipments" />
+            </Helmet>
             <Header />
             {content}
             <Footer />

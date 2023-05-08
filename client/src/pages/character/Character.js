@@ -4,6 +4,7 @@ import { DeleteCharacter } from "../../components/character/DeleteCharacter.js";
 import { FetchGet } from "../../helper/fetch.js";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import "./style/character.scss";
 
 export const Characters = () => {
@@ -23,6 +24,7 @@ export const Characters = () => {
                     setData(res);
                 }
             }catch(err){
+                console.log(err);
                 setError(err.message);
             }
         };
@@ -66,8 +68,8 @@ export const Characters = () => {
                                     <p>Arcane : {ele.attributes.arcane}</p>
                                 </div>
                                 <div className="weapons">
-                                    <p>Equipment : {ele.equipment.name}</p>
-                                    <p>Spell : {ele.spell.name}</p>
+                                    <p>Equipment : {ele.equipment?.name || 'N/A'}</p>
+                                    <p>Spell : {ele.spell?.name || 'N/A'}</p>
                                 </div>
                             </div>
                         ))}
@@ -77,6 +79,14 @@ export const Characters = () => {
     );
     return (
         <>
+            <Helmet>
+                <title>Elden Ring wiki Fansite - Characters</title>
+                <meta 
+                    name="description" 
+                    content="Create your perfect character in Elden Ring with our user-friendly character builder tool. Experiment with different builds, stats, and equipment to find the perfect combination for your playstyle. Our community provides tips and advice to help you get the most out of your character. Join us now and start building your ultimate warrior."
+                />
+                <meta name="keywords" content="blogs, elden, eldenring, elden ring, game, fromsoftware, multiplayer, community, tool, character, builder" />
+            </Helmet>
             <Header />
             {content}
             <Footer />

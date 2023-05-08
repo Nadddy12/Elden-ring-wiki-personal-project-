@@ -14,7 +14,7 @@ export const signup = async (req , res) => {
            return res.status(400).json({message:"All fields are required"});
         }
         if(password.length < 6){
-            return res.status(400).json({message:"Password must be at least 6 characters with at least one capital letter"});
+            return res.status(400).json({message:"Password must be at least 6 characters"});
         }
         const saltRounds = 10;
     
@@ -67,7 +67,6 @@ export const login = async(req , res) => {
         }
         bcrypt.compare(password, user.password, (err,match) =>{
             if(err){
-                console.log(err);
                 return res.status(400).json({message: "Invalid email or password."});
             }
             if(match){
@@ -86,7 +85,6 @@ export const login = async(req , res) => {
             }
         });
     } catch (error) {
-        console.log(error);
         res.status(500).json({message: "Internal server error."});
     }
 };

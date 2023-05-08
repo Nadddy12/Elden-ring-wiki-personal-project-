@@ -66,7 +66,6 @@ export const addEquipment = async (req, res) => {
   
     const form = formidable({ multiples: true });
     form.parse(req, async (err, fields, files) => {
-      
         if (err) {
             return res.status(400).json({ message: "The information provided in your form not completed" });
         }
@@ -110,7 +109,6 @@ export const addEquipment = async (req, res) => {
       }
     }
     catch (error) {
-      console.log(error);
       if (error.code === 11000) {
         return res.status(400).json({ message: "Name already exists" });
       }
@@ -165,7 +163,6 @@ export const updateEquipment = async (req, res) => {
         res.status(200).json({message: "Equipment successfully updated" , equipment});
     }
     catch (error) {
-      console.log(error);
       res.status(500).json({ message: "Internet server error" });
     }
   });
@@ -187,7 +184,6 @@ export const deleteEquipment = async (req , res) => {
         res.status(200).json({ message: "Equipment deleted successfully" });
     } 
     catch (error) {
-        console.log(error);
         res.status(400).json({ message: "Bad request or no id provided" });
     }
 };

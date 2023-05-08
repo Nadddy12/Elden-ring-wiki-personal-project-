@@ -51,7 +51,6 @@ export const CreateEquipment  = () => {
             const res = await FetchPostForm(URL , data )
             navigate(`/control-panel`);
         } catch (err) {
-            console.log(err);
             setError(err.message);
         }
     };

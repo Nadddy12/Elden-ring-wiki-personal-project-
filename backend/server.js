@@ -42,6 +42,6 @@ mongoose.connection.on("open", () => {
 
 });
 
-app.listen(9602,function(){
-    console.log(`http://localhost:9602`);
+app.listen(process.env.PORT,function(){
+    console.log(`http://localhost:${process.env.PORT}`);
 });

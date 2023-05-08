@@ -5,9 +5,11 @@ import { CreateComment } from "../../components/comment/CreateComment.js";
 import { EditComment } from "../../components/comment/EditComment.js";
 import { DeleteComment } from "../../components/comment/DeleteComment.js";
 import { FetchGet , FetchDelete } from "../../helper/fetch.js";
+import { Helmet } from "react-helmet";
 
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useParams , Link} from "react-router-dom";
 import "./style/oneblog.scss";
 
@@ -15,6 +17,7 @@ import "./style/oneblog.scss";
 export const OneBlog = () =>{
     
     const {user} = useSelector(state => state);
+    const navigate = useNavigate();
     
     const [blog , setBlog] = useState({});
     const [comments , setComments] = useState([]);
@@ -59,6 +62,7 @@ export const OneBlog = () =>{
         const URL = role === 'admin' ? `/admin/delete-article/${id}` : `/mod/delete-article/${id}`;
         try {
             await FetchDelete(URL)
+            navigate("/blog")
         }catch(err) {
             setError(err.message);
         }
@@ -200,6 +204,14 @@ export const OneBlog = () =>{
 
     return (
         <>
+            <Helmet>
+                <title>{blog ? blog.title : 'Elden Ring wiki Fansite' }</title>
+                <meta 
+                    name="description" 
+                    content="Join our community of fellow Elden Ring fans and discover our latest blogs about the highly anticipated action role-playing game from FromSoftware and George R.R. Martin. Our writers cover a wide range of topics, from lore and theories to character builds and gameplay strategies. Share your thoughts and engage in discussions with other fans to deepen your appreciation of Elden Ring. Explore our blogs and become a part of our passionate community today."
+                />
+                <meta name="keywords" content="blogs, elden, eldenring, elden ring, game, fromsoftware, multiplayer, community" />
+            </Helmet>
             <Header />
             {content}
             {isEditingBlog && <EditBlog blog={blog} closeEditModal={closeEditModal} onBlogUpdate={updateBlog} />}

@@ -115,7 +115,6 @@ export const deleteCharacterByUser = async (req , res) =>{
         res.status(200).json({ message: "Comment successfully deleted" });
     }
     catch(err){
-        console.log(err);
         res.status(500).json({ message: "internal Server Error" });
     }
 

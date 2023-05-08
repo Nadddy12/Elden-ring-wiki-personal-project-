@@ -11,7 +11,6 @@ export const getAllSpell = async (req , res) => {
         }
         res.status(200).json(spell);
     }catch (err) {
-        console.log(err);
         res.status(500).json({message:"Server error"});
     }
 };
@@ -36,7 +35,6 @@ export const getSpellByType = async (req, res) => {
       }
     }    
     catch (err) {
-      console.log(err);
       res.status(500).json({ message: "Server error" });
     }
 };
@@ -56,7 +54,6 @@ export const getOneSpell = async (req , res) => {
         }
         res.status(200).json(spell);
     }catch (err) {
-        console.log(err);
         res.status(401).json({message:"Bad request or no id provided"});
     }
 };
@@ -109,7 +106,6 @@ export const addSpell = async (req, res) => {
       }
     }
     catch (error) {
-      console.log(error);
       if (error.code === 11000) {
         return res.status(400).json({message:"Name already exists"});
         }
@@ -164,7 +160,6 @@ export const updateSpell = async (req, res) => {
         res.status(200).json({message: "Spell successfully updated" , spell});
     }
     catch (error) {
-      console.log(error);
       res.status(500).json({ message: "Internet server error" });
     }
   });
@@ -186,7 +181,6 @@ export const deleteSpell = async (req , res) => {
         res.status(200).json({ message: "Spell deleted successfully" });
     } 
     catch (error) {
-        console.log(error);
         res.status(400).json({ message: "Bad request or no id provided" });
     }
 };

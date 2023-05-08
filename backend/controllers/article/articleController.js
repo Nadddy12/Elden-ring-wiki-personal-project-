@@ -8,7 +8,6 @@ export const getAllBlogArticle = async (req , res) => {
         const article = await Article.find({type:"blog"}).populate({path: 'user', select: '-password'});
         res.status(200).json(article);
     }catch (err) {
-        console.log(err);
         res.status(500).json({message:"Bad request or no id provided"});
     }
 };
@@ -20,7 +19,6 @@ export const getAllGuideArticle = async (req , res) => {
         const article = await Article.find({type:"guide"});
         res.status(200).json(article);
     }catch (err) {
-        console.log(err);
         res.status(500).json({message:"Bad request or no id provided"});
     }
 };
@@ -41,7 +39,6 @@ export const getOneArticle = async (req , res) => {
         }
         res.status(200).json(article);
     }catch (err) {
-        console.log(err);
         res.status(500).json({message:"Internal server error"});
     }
 };
@@ -70,7 +67,6 @@ export const createArticle = async (req , res) => {
         res.status(200).json({message:"Article created successfully!", article});
     }
     catch(err){
-        console.log(err);
         if (err.code === 11000) {
             return res.status(400).json({ message: "title already exists" });
         }
@@ -101,7 +97,6 @@ export const updateArticle = async (req , res) => {
         res.status(200).json({ message: "Article updated successfully", article });
     } 
     catch (error) {
-        console.log(error);
         res.status(500).json({ message: "Bad request or no id provided" });
     }
 };
@@ -122,7 +117,6 @@ export const deleteArticle = async (req , res) => {
         res.status(200).json({ message: "Article deleted successfully" });
     } 
     catch (error) {
-        console.log(error);
         res.status(400).json({ message: "Bad request or no id provided" });
     }
 };

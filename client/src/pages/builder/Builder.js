@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import { Helmet } from "react-helmet";
 import "./style/builder.scss";
 
 export const Builder = () => {
@@ -200,6 +201,14 @@ export const Builder = () => {
     
     return (
         <>
+        <Helmet>
+                <title>Elden Ring wiki Fansite - Builder</title>
+                <meta 
+                    name="description" 
+                    content="Create your perfect character in Elden Ring with our user-friendly character builder tool. Experiment with different builds, stats, and equipment to find the perfect combination for your playstyle. Our community provides tips and advice to help you get the most out of your character. Join us now and start building your ultimate warrior."
+                />
+                <meta name="keywords" content="blogs, elden, eldenring, elden ring, game, fromsoftware, multiplayer, community, tool, character, builder" />
+            </Helmet>
         <Header />
         {content}
         <Footer />

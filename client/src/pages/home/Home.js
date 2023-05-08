@@ -1,6 +1,7 @@
 import {Header} from "../../components/layout/Header.js";
 import { Footer } from "../../components/layout/Footer.js";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import "./home.scss";
 
 import character_bw from "../../assets/photo/character_bw.png";
@@ -9,6 +10,13 @@ export const Home = () => {
     
     return(
         <>
+            <Helmet>
+                <title>Elden Ring wiki Fansite</title>
+                <meta 
+                    name="description" 
+                    content="Welcome to our Elden Ring fansite! Get the latest information on release date, gameplay, story, multiplayer, and our powerful character builder tool."
+                />
+            </Helmet>
             <Header />
             <main>
                 <section>
